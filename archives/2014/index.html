@@ -70,9 +70,9 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-软件设计模式之一二" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-software-pattern" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2014/08/08/软件设计模式之一二/" class="article-date">
+    <a href="/blog/2014/08/08/software-pattern/" class="article-date">
   <time datetime="2014-08-08T21:52:11.000Z" itemprop="datePublished">8月 8 2014</time>
 </a>
     
@@ -84,7 +84,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/blog/2014/08/08/软件设计模式之一二/">软件设计模式 (Software Design Pattern) 之一二</a>
+      <a class="article-title" href="/blog/2014/08/08/software-pattern/">软件设计模式 (Software Design Pattern) 之一二</a>
     </h1>
   
 
@@ -92,12 +92,290 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>很久很久以前，一所大学只有几十个学生。那个时候，如果学校要记录所有学生的信息只要用一张纸，写下所有人的名字和信息就可以，比如：</p>
+        <p>很久很久以前，一所大学只有几个学生。那个时候，如果学校要记录所有学生的信息只要用一张纸，写下所有人的名字和信息就可以，比如：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">姓名</th>
+<th style="text-align:center">性别</th>
+<th style="text-align:center">年龄</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">张三</td>
+<td style="text-align:center">男</td>
+<td style="text-align:center">19</td>
+</tr>
+<tr>
+<td style="text-align:center">李四</td>
+<td style="text-align:center">男</td>
+<td style="text-align:center">18</td>
+</tr>
+<tr>
+<td style="text-align:center">王二麻子</td>
+<td style="text-align:center">女</td>
+<td style="text-align:center">18</td>
+</tr>
+</tbody>
+</table>
+<p>在他们上课之后，学校遇到了一个难题，每个学生都有很多科的成绩需要登记。所以表格就变成了这个样子：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">姓名</th>
+<th style="text-align:center">性别</th>
+<th style="text-align:center">年龄</th>
+<th style="text-align:center">高数</th>
+<th style="text-align:center">政治</th>
+<th style="text-align:center">英文</th>
+<th style="text-align:center">历史</th>
+<th style="text-align:center">文学</th>
+<th style="text-align:center">演讲</th>
+<th style="text-align:center">地理</th>
+<th style="text-align:center">摄影</th>
+<th style="text-align:center">物理</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">张三</td>
+<td style="text-align:center">男</td>
+<td style="text-align:center">19</td>
+<td style="text-align:center">86</td>
+<td style="text-align:center">83</td>
+<td style="text-align:center">91</td>
+<td style="text-align:center">92</td>
+<td style="text-align:center">97</td>
+<td style="text-align:center">82</td>
+<td style="text-align:center">84</td>
+<td style="text-align:center">91</td>
+<td style="text-align:center">92</td>
+</tr>
+<tr>
+<td style="text-align:center">李四</td>
+<td style="text-align:center">男</td>
+<td style="text-align:center">18</td>
+<td style="text-align:center">97</td>
+<td style="text-align:center">74</td>
+<td style="text-align:center">79</td>
+<td style="text-align:center">72</td>
+<td style="text-align:center">97</td>
+<td style="text-align:center">62</td>
+<td style="text-align:center">84</td>
+<td style="text-align:center">71</td>
+<td style="text-align:center">100</td>
+</tr>
+<tr>
+<td style="text-align:center">王二麻子</td>
+<td style="text-align:center">女</td>
+<td style="text-align:center">18</td>
+<td style="text-align:center">99</td>
+<td style="text-align:center">83</td>
+<td style="text-align:center">91</td>
+<td style="text-align:center">76</td>
+<td style="text-align:center">65</td>
+<td style="text-align:center">82</td>
+<td style="text-align:center">84</td>
+<td style="text-align:center">99</td>
+<td style="text-align:center">99</td>
+</tr>
+</tbody>
+</table>
+<p>后来，他们被分到了不同的专业，学校为了重复利用之前的表格，在表格上直接加了内容：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">姓名</th>
+<th style="text-align:center">性别</th>
+<th style="text-align:center">年龄</th>
+<th style="text-align:center">学院</th>
+<th style="text-align:center">专业</th>
+<th style="text-align:center">高数</th>
+<th style="text-align:center">政治</th>
+<th>英文</th>
+<th>… </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">张三</td>
+<td style="text-align:center">男</td>
+<td style="text-align:center">19</td>
+<td style="text-align:center">文学院</td>
+<td style="text-align:center">历史系</td>
+<td style="text-align:center">86</td>
+<td style="text-align:center">83</td>
+<td>91</td>
+<td>…</td>
+</tr>
+<tr>
+<td style="text-align:center">李四</td>
+<td style="text-align:center">男</td>
+<td style="text-align:center">18</td>
+<td style="text-align:center">理学院</td>
+<td style="text-align:center">数学系</td>
+<td style="text-align:center">97</td>
+<td style="text-align:center">74</td>
+<td>79</td>
+<td>…</td>
+</tr>
+<tr>
+<td style="text-align:center">王二麻子</td>
+<td style="text-align:center">女</td>
+<td style="text-align:center">18</td>
+<td style="text-align:center">理学院</td>
+<td style="text-align:center">物理系</td>
+<td style="text-align:center">99</td>
+<td style="text-align:center">83</td>
+<td>91</td>
+<td>…</td>
+</tr>
+</tbody>
+</table>
+<p>再后来，学校又多了很多人，于是这个表格被无限的拉长了：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">姓名</th>
+<th style="text-align:center">性别</th>
+<th style="text-align:center">年龄</th>
+<th style="text-align:center">学院</th>
+<th style="text-align:center">专业</th>
+<th style="text-align:center">高数</th>
+<th style="text-align:center">政治</th>
+<th>英文</th>
+<th>… </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">张三</td>
+<td style="text-align:center">男</td>
+<td style="text-align:center">19</td>
+<td style="text-align:center">文学院</td>
+<td style="text-align:center">历史系</td>
+<td style="text-align:center">86</td>
+<td style="text-align:center">83</td>
+<td>91</td>
+<td>…</td>
+</tr>
+<tr>
+<td style="text-align:center">李四</td>
+<td style="text-align:center">男</td>
+<td style="text-align:center">18</td>
+<td style="text-align:center">理学院</td>
+<td style="text-align:center">数学系</td>
+<td style="text-align:center">97</td>
+<td style="text-align:center">74</td>
+<td>79</td>
+<td>…</td>
+</tr>
+<tr>
+<td style="text-align:center">王二麻子</td>
+<td style="text-align:center">女</td>
+<td style="text-align:center">18</td>
+<td style="text-align:center">理学院</td>
+<td style="text-align:center">物理系</td>
+<td style="text-align:center">99</td>
+<td style="text-align:center">83</td>
+<td>91</td>
+<td>…</td>
+</tr>
+<tr>
+<td style="text-align:center">…</td>
+<td style="text-align:center">…</td>
+<td style="text-align:center">…</td>
+<td style="text-align:center">…</td>
+<td style="text-align:center">…</td>
+<td style="text-align:center">…</td>
+<td style="text-align:center">…</td>
+<td>…</td>
+<td>… </td>
+</tr>
+<tr>
+<td style="text-align:center">…</td>
+<td style="text-align:center">…</td>
+<td style="text-align:center">…</td>
+<td style="text-align:center">…</td>
+<td style="text-align:center">…</td>
+<td style="text-align:center">…</td>
+<td style="text-align:center">…</td>
+<td>…</td>
+<td>… </td>
+</tr>
+<tr>
+<td style="text-align:center">…</td>
+<td style="text-align:center">…</td>
+<td style="text-align:center">…</td>
+<td style="text-align:center">…</td>
+<td style="text-align:center">…</td>
+<td style="text-align:center">…</td>
+<td style="text-align:center">…</td>
+<td>…</td>
+<td>… </td>
+</tr>
+</tbody>
+</table>
+<p>后来……</p>
+<p>到这里，大家会发现一个问题。最初的表格设计没有考虑很多因素，导致后期表格不够用，插入和寻找的效率很低，占地方多，而且不容易维护。很多开发者在开发软件的时候也有类似经历，因为最初设计不够完善，导致后期不论是添加功能还是使用上，都十分的不便。</p>
+<p>1978年，奥地利建筑师 <cite>Christopher Alexander <a href="http://en.wikipedia.org/wiki/Software_design_pattern" target="_blank" rel="external">1</a></cite> 首先提出可以通过经验总结一些设计模式 (Design Patterns) 以供后人在设计时借鉴。计算机软件领域，则在1995年时，由<cite>四人帮 <a href="http://en.wikipedia.org/wiki/Software_design_pattern" target="_blank" rel="external">1</a></cite> (Gang of Four / Gamma et al) 在《设计模式：可复用面向对象软件的基础》（Design Patterns: Elements of Reusable Object-Oriented Software，ISBN 0-201-63361-2) 中提出。四人帮共提出了23种不同的设计模式。台湾自由撰稿人 <cite>Justin Lin <a href="http://openhome.cc/Gossip/DesignPattern/" target="_blank" rel="external">2</a></cite> 在博客中很详细的描述了这23种设计模式的定义以及用法，本文也会在定义部分引用 Justin 的原文。</p>
+<p>简单的废话之后来切入正题。本文是笔者在滑铁卢大学 CS247 (CS247 : Software Abstraction<br>and Specification, 教授：Joanne Atlee) 的学习笔记，所以主要讨论的是课中提及的23种设计模式中的10种。本文编程语言使用C++。</p>
+<hr>
+<h2 id="领进门">领进门</h2>
+<p>设计模式不是人们发明出来，而是人们发现的。这就像买西瓜，前人发现西瓜拍起来响的，纹路清晰的比较甜，这是一个已经存在的事实，被人们发现，并用于挑选西瓜，而不是我们告诉西瓜，你要这样长才会甜。设计模式也是一样的，前人们发现了这些十分有效的设计模式，所以我们学习、使用这些模式进行软件设计，而不是我们发明了这种方法，让软件这样被设计。</p>
+<p>所以说，如果我们先被告知一种设计模式的概念和定义，再去研究怎么使用，就非常本末倒置了。学习设计模式最好的办法反倒是在你大量编程、实现代码的时候，发现了自己的代码很多地方不好用，而去寻找解决的办法。</p>
+<p>所以本文的思路是，首先提出复杂的情况，然后提出解决的办法，最后引入四人帮提出的设计方法，给出定义。</p>
+<hr>
+<h2 id="学生成绩办公室">学生成绩办公室</h2>
+<p>还记得刚才那所悲催的学校吗？我们继续拿他开刀。现在学校已经有了两万学生，三千老师，几百种不同的课。所有的课都会有不同的期末成绩，学生考试，考完试以后教授批改卷子，然后给出最后分数。如果一个学生有 5 门课，他就要去 5 个教授。如果一个教授有 200 个学生，就要等在办公室，等着 200 次询问和查找。这不但容易出错（拿错卷子，成绩没有记录，没发查找，浪费时间，浪费精力，容易丢失等等），而且对学生考试后的身、心、灵都造成了极大的疲惫，也给投机取巧的学生带来偷偷该成绩的机会。</p>
+<p>所以怎么解决？我相信大家都会知道，很好的一个解决办法就是设立一个学生成绩办公室，那么教授批改了成绩之后，把卷子统一交给成绩办公室上分、记录。学生如果要查询成绩，可以直接到学习成绩办公室根据自己的名字查询所有成绩。也就是说，我们避免了教授和学生的直接接触（多对多接触），而通过办公室改成了间接接触（多对一对多）。用一个图来更直观的说明：</p>
+<p><img src="https://dl.dropboxusercontent.com/u/43681877/temp/facade.jpg" alt="有了学生成绩办公室之前之后"> </p>
+<p>使用了这种方法之后，教授和学生都可以减少很多劳动。而且学生和教授数量的增加也不会再造成很大影响。不论从安全角度或是效率角度都是绝对性的提升。</p>
+<p>一种类似的方法在软件设计中叫做外观模式（Façade Pattern）。</p>
+<blockquote>
+<p>A <strong>facade</strong> is an object that provides a simplified interface to a larger body of code, such as a class library. </p>
+</blockquote>
+<p>外观模式为子系统中的一组接口提供一个统一的高层接口，使得子系统更容易使用。在我们的例子中，可以把学生想象为客户（Client），教授和办公室是学校工作人员为单位的子系统（Sub-System），成绩办公室就是 Façade，而每个教授就是不同的 Packages。使用这种方法后，Clients 在访问 packages 的时候，程序提供了一个高层对外接口，可以有效地简化 packages 的使用，隐藏依赖的 packages，降低耦合，十分利于分工合作。</p>
+<p>而 Façade 的缺点也显而易见。学生需要掌握一门新的技能 - 去成绩办公室问成绩，而不能直接问教授，其中就缺少了很多方便性和活动性。</p>
+<p>一个代码实现如下：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> CPU {}</div><div class="line"><span class="keyword">class</span> Memory {}</div><div class="line"><span class="keyword">class</span> HardDrive {}</div><div class="line"><span class="keyword">class</span> Computer {         <span class="comment">// Façade</span></div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="keyword">void</span> startComputer() {</div><div class="line">        cpu.freeze();</div><div class="line">        memory.load(BOOT_ADDRESS, hardDrive.read(BOOT_SECTOR, SECTOR_SIZE));</div><div class="line">        cpu.jump(BOOT_ADDRESS);</div><div class="line">        cpu.execute();</div><div class="line">    }</div><div class="line">}</div><div class="line"><span class="keyword">class</span> You {              <span class="comment">// Client</span></div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="keyword">void</span> start(String[] args) {</div><div class="line">        Computer facade = <span class="keyword">new</span> Computer();</div><div class="line">        facade.startComputer();</div><div class="line">    }</div><div class="line">}</div><div class="line"></div><div class="line"><span class="comment">// Source: http://zh.wikipedia.org/wiki/外觀模式</span></div></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="学院注册办公室">学院注册办公室</h2>
+<p>学生查成绩的问题有着落了。可是新学期来了，学校又有了一个新的问题：学校一共有 6 个学院，分别是工程学院、数学学院、文科学院、科学学院、环境学院、应用健康学院。新生入学了以后要统一在学校注册。现在的流程是这样的：每个学生到了学校之后去同一个地方报道。学校把 6 个学院的所有东西放在一片空地上，然后根据你是哪个学院的为你找出学院专门的制服、专门的购物表、专门宿舍地图等。所以每一个学生来，学校都要在 6 种衣服中选择 1 种给你，再在 6 中传单中找出 1 种给你。这样非常浪费时间，效率很低，而且很容易拿错。</p>
+<p>解决方案其实也很简单。我们之前只有一个地方报道，如果我们把报道的地方增加到 6 个，每个学院一个。这样，学生来报道的时候可以直接根据提示去自己的学院。这样，在不同的 6 个地方报道的人，总是会拿到一套相同的东西，这样就不再需要在 6 个中寻找某一个学院的。</p>
+<p><img src="https://dl.dropboxusercontent.com/u/43681877/temp/factory.jpg" alt="注册办公室"> </p>
+<p>虽然听起来是一个很简单的问题和很显而易见的解决方案，这却是所有软件设计中最常用、最好用的一种设计模式，这种设计模式大量的应用于各种项目中。</p>
+<p>我们想另外一个例子，在一家大型汽车工厂，我们要生产 4 种不同型号的车（A, B, C, D)。我们有 8 条生产线，如果这 4 种汽车的市场需求量是相等的，那么如果你是生产线设计者，你会让：</p>
+<ul>
+<li>所有生产线同时生产一辆A，再生产一辆B，一辆C，一辆D，一辆A，一辆B……</li>
+<li>每两条生产线连续生产一种型号的车（1, 2 号线生产A，3, 4 号线生产B， ……）</li>
+</ul>
+<p>答案毋庸置疑是第二个。背后的原理就是我们现在要介绍的：工厂方法模式（Factory Method Pattern）</p>
+<blockquote>
+<p><strong>Factory method pattern</strong> is a pattern deals with the problem of creating objects without specifying the exact class of object that will be created.</p>
+</blockquote>
+<p>以 Justin 举得一个例子来说，如果我们编写一个文件编辑器，它可以支持很多种不同的格式如 DOC, RTF 等。如果我们要写存储的逻辑，每一种格式的存储逻辑都不一样。可是我们使用 Factory Method Pattern 就不需要担心每一种格式的区别，只需要写好逻辑，让子类来定义具体的方法即可。也就是说，这种模式适用于如果你希望在父类中的一个行为是由子类来具体定义。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> Office { <span class="keyword">public</span>: <span class="keyword">virtual</span> ~Office() {} }</div><div class="line"><span class="keyword">class</span> EngineeringOffice : <span class="keyword">public</span> Office {}</div><div class="line"><span class="keyword">class</span> MathOffice : <span class="keyword">public</span> Office {}</div><div class="line"><span class="comment">// ...</span></div><div class="line"><span class="keyword">class</span> Student {}</div><div class="line"><span class="keyword">class</span> EngineeringStudent : <span class="keyword">public</span> Student {}</div><div class="line"><span class="keyword">class</span> MathStudent : <span class="keyword">public</span> Student {}</div><div class="line"><span class="comment">// ...</span></div></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="苹果做手机，康宁大猩猩做屏幕">苹果做手机，康宁大猩猩做屏幕</h2>
+<p>苹果手机从2007年到现在，从零到第一的背后，必然是优秀的团队与成功的设计。可是苹果会设计所有的每一个细节吗？答案当然是不，每一部iPhone的很多组成部分都来自世界各个厂商。康宁大猩猩玻璃现在广受好评，很多厂商都是用康宁制作的玻璃作为自己手机的屏幕玻璃材质。那么问题就来了：苹果很会设计手机，而康宁很会做玻璃，可是如果让康宁自己做手机，或者让苹果自己发明一种玻璃，可能产品质量就大打折扣，而且两个厂商都不能全心的做自己拿手的东西。</p>
+<p>那么怎么办呢？</p>
+<p>对，答案就是：康宁会做玻璃，那你就一心一意的做玻璃。苹果你会做手机，你就死心塌地的做手机。一个人干一个人的事。康宁做的玻璃可以让苹果用，三星用，HTC用。苹果也可以挑选康宁家，蓝宝石家，或者别人家。</p>
+<p>这种设计方法叫做单例模式（Singleton Pattern），单例单例，顾名思义，就是只有一个实例的意思。</p>
+<blockquote>
+<p><strong>Singleton Pattern</strong> is a design pattern that restricts the <em>instantiation</em> of a class to one object. </p>
+</blockquote>
+<p>也就是说，单例对象的类必须保证只有一个实例存在，并提供一个访问这个实例的方法。一般，一个 singleton object 不需要被 destruct。它会随着一段程式的终止而被 deallocate。<br>一段很简答的实现就是：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> Singleton {</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="keyword">static</span> Singleton* instance() { <span class="keyword">return</span> &e; }</div><div class="line"><span class="keyword">private</span>:</div><div class="line">    <span class="keyword">static</span> Singleton s;               <span class="comment">// 被保护的 Singleton 的实例</span></div><div class="line">    Singleton(<span class="keyword">const</span> Singleton&);      <span class="comment">// 被保护的 copy-constructor</span></div><div class="line">};</div><div class="line"><span class="comment">// Singleton Singleton::s();</span></div></pre></td></tr></table></figure>
+
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jobmine.github.io/2014/08/08/软件设计模式之一二/" data-id="0rkrl62kz01fmfi2" class="article-share-link">Share</a>
+      <a data-url="http://jobmine.github.io/2014/08/08/software-pattern/" data-id="ohxj80ngysoztprx" class="article-share-link">Share</a>
       
       
     </footer>
