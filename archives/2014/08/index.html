@@ -92,7 +92,8 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>很久很久以前，一所大学只有几个学生。那个时候，如果学校要记录所有学生的信息只要用一张纸，写下所有人的名字和信息就可以，比如：</p>
+        <p><a id="top"></a><br><a href="#content">直接跳到最后总结与目录</a></p>
+<p>很久很久以前，一所大学只有几个学生。那个时候，如果学校要记录所有学生的信息只要用一张纸，写下所有人的名字和信息就可以，比如：</p>
 <table>
 <thead>
 <tr>
@@ -327,7 +328,7 @@
 <p>所以说，如果我们先被告知一种设计模式的概念和定义，再去研究怎么使用，就非常本末倒置了。学习设计模式最好的办法反倒是在你大量编程、实现代码的时候，发现了自己的代码很多地方不好用，而去寻找解决的办法。</p>
 <p>所以本文的思路是，首先提出复杂的情况，然后提出解决的办法，最后引入四人帮提出的设计方法，给出定义。</p>
 <hr>
-<h2 id="学生成绩办公室">学生成绩办公室</h2>
+<h2 id="学生成绩办公室_-_Façade"><a id="facade pattern"></a>学生成绩办公室 - Façade</h2>
 <p>还记得刚才那所悲催的学校吗？我们继续拿他开刀。现在学校已经有了两万学生，三千老师，几百种不同的课。所有的课都会有不同的期末成绩，学生考试，考完试以后教授批改卷子，然后给出最后分数。如果一个学生有 5 门课，他就要去分别找 5 个教授。如果一个教授有 200 个学生，就要等在办公室，等着 200 次询问和查找。这不但容易出错（拿错卷子，成绩没有记录，浪费时间，浪费精力，容易丢失等等），而且对学生考试后的身、心、灵都造成了极大的疲惫，也给投机取巧的学生带来偷偷改成绩的机会。</p>
 <p>所以怎么解决？我相信大家都会知道，很好的一个解决办法就是设立一个学生成绩办公室，那么教授批改了成绩之后，把卷子统一交给成绩办公室上分、记录。学生如果要查询成绩，可以直接到学习成绩办公室根据自己的名字查询所有成绩。也就是说，我们避免了教授和学生的直接接触（多对多接触），而通过办公室改成了间接接触（多对一对多）。用一个图来更直观的说明：</p>
 <p><img src="https://dl.dropboxusercontent.com/u/43681877/temp/facade.jpg" alt="有了学生成绩办公室之前之后"> </p>
@@ -342,15 +343,17 @@
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> CPU {}</div><div class="line"><span class="keyword">class</span> Memory {}</div><div class="line"><span class="keyword">class</span> HardDrive {}</div><div class="line"><span class="keyword">class</span> Computer {         <span class="comment">// Façade</span></div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="keyword">void</span> startComputer() {</div><div class="line">        cpu.freeze();</div><div class="line">        memory.load(BOOT_ADDRESS, hardDrive.read(BOOT_SECTOR, SECTOR_SIZE));</div><div class="line">        cpu.jump(BOOT_ADDRESS);</div><div class="line">        cpu.execute();</div><div class="line">    }</div><div class="line">}</div><div class="line"><span class="keyword">class</span> You {              <span class="comment">// Client</span></div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="keyword">void</span> start(String[] args) {</div><div class="line">        Computer facade = <span class="keyword">new</span> Computer();</div><div class="line">        facade.startComputer();</div><div class="line">    }</div><div class="line">}</div><div class="line"></div><div class="line"><span class="comment">// Source: http://zh.wikipedia.org/wiki/外觀模式</span></div></pre></td></tr></table></figure>
 
 <hr>
-<h2 id="学院注册办公室">学院注册办公室</h2>
+<h2 id="_学院注册办公室_-_Factory_Method"><a id="factory method pattern"></a> 学院注册办公室 - Factory Method</h2>
 <p>学生查成绩的问题有着落了。可是新学期来了，学校又有了一个新的问题：学校一共有 6 个学院，分别是工程学院、数学学院、文科学院、科学学院、环境学院、应用健康学院。新生入学了以后要统一在学校注册。现在的流程是这样的：每个学生到了学校之后去同一个地方报道。学校把 6 个学院的所有东西放在一片空地上，然后根据你是哪个学院的为你找出学院专门的制服、专门的购物表、专门宿舍地图等。所以每一个学生来，学校都要在 6 种衣服中选择 1 种给你，再在 6 中传单中找出 1 种给你。这样非常浪费时间，效率很低，而且很容易拿错。</p>
 <p>解决方案其实也很简单。我们之前只有一个地方报道，如果我们把报道的地方增加到 6 个，每个学院一个。这样，学生来报道的时候可以直接根据提示去自己的学院。这样，在不同的 6 个地方报道的人，总是会拿到一套相同的东西，这样就不再需要在 6 个中寻找某一个学院的。</p>
 <p><img src="https://dl.dropboxusercontent.com/u/43681877/temp/factory.jpg" alt="注册办公室"> </p>
 <p>虽然听起来是一个很简单的问题和很显而易见的解决方案，这却是所有软件设计中最常用、最好用的一种设计模式，这种设计模式大量的应用于各种项目中。</p>
 <p>我们想另外一个例子，在一家大型汽车工厂，我们要生产 4 种不同型号的车（A, B, C, D)。我们有 8 条生产线，如果这 4 种汽车的市场需求量是相等的，那么如果你是生产线设计者，你会让：</p>
 <ul>
-<li>所有生产线同时生产一辆A，再生产一辆B，一辆C，一辆D，一辆A，一辆B……</li>
-<li>每两条生产线连续生产一种型号的车（1, 2 号线生产A，3, 4 号线生产B， ……）</li>
+<li><p>所有生产线同时生产一辆A，再生产一辆B，一辆C，一辆D，一辆A，一辆B……</p>
+</li>
+<li><p>每两条生产线连续生产一种型号的车（1, 2 号线生产A，3, 4 号线生产B， ……）</p>
+</li>
 </ul>
 <p>答案毋庸置疑是第二个。背后的原理就是我们现在要介绍的：工厂方法模式（Factory Method Pattern）</p>
 <blockquote>
@@ -360,7 +363,148 @@
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> Office { <span class="keyword">public</span>: <span class="keyword">virtual</span> ~Office() {} }</div><div class="line"><span class="keyword">class</span> EngineeringOffice : <span class="keyword">public</span> Office {}</div><div class="line"><span class="keyword">class</span> MathOffice : <span class="keyword">public</span> Office {}</div><div class="line"><span class="comment">// ...</span></div><div class="line"><span class="keyword">class</span> Student {}</div><div class="line"><span class="keyword">class</span> EngineeringStudent : <span class="keyword">public</span> Student {}</div><div class="line"><span class="keyword">class</span> MathStudent : <span class="keyword">public</span> Student {}</div><div class="line"><span class="comment">// ...</span></div></pre></td></tr></table></figure>
 
 <hr>
-<h2 id="苹果做手机，康宁大猩猩做屏幕">苹果做手机，康宁大猩猩做屏幕</h2>
+<h2 id="遍历_-_Iterator"><a id="iterator pattern"></a>遍历 - Iterator</h2>
+<p>遍历是一个所有程序员都非常熟悉的概念。所谓遍历就是在一个容器中，对每一项数据做某些事情。接下来提出的这个设计模式，既简单又复杂，既易懂又最让人费解。</p>
+<p>如果说上面的学生注册办公室问题中，工程学院的学生有 2217 人，办公室接待只有一个人。为了确保来的人都有被接待，那么：</p>
+<ol>
+<li><p>准备一个计数器，一开始是0，每接待完一个人计数器加 1，计数器一直加到 2217，然后结束。 </p>
+</li>
+<li><p>告知所有人接待时间是 8:00 到 12:00。这个期间看队伍里有没有人，如果还有人就接待，到时间了并且没有人了就结束。</p>
+</li>
+</ol>
+<p>似乎又是一个显而易见，或者说人类本能的答案，肯定是第二个。可是又有谁没有在自己的项目中出现过这样的代码：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">2177</span>, i++) {</div><div class="line">    <span class="comment">// 接待</span></div><div class="line">}</div></pre></td></tr></table></figure>
+
+<p>这里，我们就通过一个很不全面的例子，引出了一个设计模式：迭代器模式（Iterator pattern）。迭代器与容器息息相关，甚至可以说一个容器没有迭代器就失去了最大的功能。所以，在C++ STL（标准模板库）中，我们常用的容器如 <code>vector</code>, <code>set</code>, <code>string</code> 等等，都自带了默认的迭代器，我们只需要直接使用就可以，而很少需要自己动手实现。</p>
+<p>我们来看一个软件设计模式中的迭代器实例。代码实现了上面所描述的注册办公室的例子：<br>首先，我们希望办公室可以看到每个学生是否在队伍中，所以：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">Office* mathOffice = <span class="keyword">new</span> Office; <span class="comment">// 创建办公室</span></div><div class="line">OfficeIterator* iter = mathOffice -&gt; createIterator(); <span class="comment">// 创建 Iterator</span></div><div class="line">iter -&gt; first(); <span class="comment">// 指针指向队伍中第一个学生</span></div><div class="line"><span class="comment">// 这个循环开始办理每一个在队伍中的学生</span></div><div class="line"><span class="keyword">while</span> ( iter -&gt; hasNext() ) {</div><div class="line">    Student* s = iter -&gt; next();</div><div class="line">    <span class="comment">// ... 安排该学生注册</span></div><div class="line">}</div></pre></td></tr></table></figure>
+
+<p>以上便是使用，而不需要在循环中加入 <code>for</code> 循环。<br>可惜，STL 并没有帮我们定义这种 class，所以我们要手动实现：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> OfficeIterator; <span class="comment">// 在实现办公室迭代器前，我们先实现办公室这个class。</span></div><div class="line"></div><div class="line"><span class="keyword">class</span> Office {</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="keyword">void</span> newComingStudent(Student*);</div><div class="line">    Student* getStudent(<span class="keyword">int</span>) <span class="keyword">const</span>;</div><div class="line">    <span class="keyword">int</span> size() <span class="keyword">const</span>;</div><div class="line">    OfficeIterator* createIterator();</div><div class="line"><span class="keyword">private</span>:</div><div class="line">    <span class="comment">// 此处因为随时有新生可能加入到队伍中，我们使用STL提供的vector</span></div><div class="line">    std::<span class="stl_container"><span class="built_in">vector</span>&lt;Student*&gt;</span> students_; </div><div class="line">};</div><div class="line"></div><div class="line">OfficeIterator* Office::createIterator() {</div><div class="line">    <span class="keyword">return</span> <span class="keyword">new</span> OfficeIterator(<span class="keyword">this</span>);</div><div class="line">}</div></pre></td></tr></table></figure>
+
+<p>接下来，我们要实现上面的办公室迭代器 <code>class OfficeIterator</code>：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 创建学生办公室的 Iterator class</span></div><div class="line"><span class="keyword">class</span> OfficeIterator {</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    OfficeIterator(Office* o) : student_(o), cursor_(<span class="number">0</span>) {}</div><div class="line">    Student* next();</div><div class="line">    <span class="keyword">bool</span> hasNext() <span class="keyword">const</span>; <span class="comment">// 在下方实现</span></div><div class="line">    <span class="keyword">void</span> first() { cursor_ = <span class="number">0</span>; } <span class="comment">// 指向队伍中第一个学生</span></div><div class="line">    <span class="comment">// ...</span></div><div class="line"><span class="keyword">private</span>:</div><div class="line">    Student* student_; <span class="comment">// 指向工程系学生的队伍</span></div><div class="line">    <span class="keyword">int</span> cursor_;  </div><div class="line">};</div><div class="line"></div><div class="line"><span class="comment">// 看看还有没有学生在队伍中等待被接待</span></div><div class="line"><span class="keyword">bool</span> OfficeIterator::hasNext() <span class="keyword">const</span> {</div><div class="line">    <span class="keyword">return</span> student_ -&gt; size() &gt; cursor_;</div><div class="line">}</div><div class="line"><span class="comment">// 如果有的话，办理下一个学生</span></div><div class="line"></div><div class="line">Student* OfficeIterator::next() {</div><div class="line">    <span class="keyword">if</span> (!OfficeIterator::hasNext()) {</div><div class="line">        <span class="keyword">return</span> NULL;</div><div class="line">    } <span class="keyword">else</span> {</div><div class="line">        Student* nextStudentName = student_ -&gt; getName(cursor_);</div><div class="line">        cursor_ ++;</div><div class="line">        <span class="keyword">return</span> nextStudentName;</div><div class="line">    }</div><div class="line">}</div></pre></td></tr></table></figure>
+
+<p>这样，我们就完成了这个逻辑。还有很多可以完善，比如，如果队伍中没有人了，但是时间还没到，那么我们就每隔五分钟检查一下队伍中是否有 <code>first()</code>，也就是 <code>cursor_ = 0</code> 时。如果有，再开始循环。</p>
+<p>好消息是，一个迭代器就这样完成了。坏消息是，我们看到的只是迭代器的冰山一角。</p>
+<blockquote>
+<p>You can insert only in one end and remove from the other in a <strong>queue</strong> container, but from both ends in a <strong>deque</strong>.</p>
+</blockquote>
+<p>STL 容器 <code>queue</code> 和 <code>deque</code> 最大的区别就是 <code>queue</code> 只能从后面进，前面出（或反过来），而 <code>deque</code> 可以从两边随便进出。比如刚才的例子中，其实我们就是建造了一个<code>queue</code>容器。</p>
+<p>可是新的问题来了：因为后面的同学会等很久，所以办公室决定从队伍的最后面开始发新生手册，这样可以让这些学生打发时间。所以我们这时就需要一个迭代器从一个队伍的最后开始向前遍历。</p>
+<p>一个解决办法是，我们让队伍重新排列，最后一个站到第一个，最后第二个站在第二个，重新组成一个队伍，然后从前向后发新生手册。之后再返回来，再继续办理。不过这样效率非常低（而且某种角度很脑残）。所以，我们还需要一个新的迭代器方法。</p>
+<p>在 <code>class Office</code> 中加入公共方法 <code>BackOfficeIterator* Office::createBackIterator();</code></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">BackOfficeIterator* Office::createBackIterator() {</div><div class="line">    <span class="keyword">return</span> <span class="keyword">new</span> BackOfficeIterator(<span class="keyword">this</span>);</div><div class="line">}</div></pre></td></tr></table></figure>
+
+<p>因为两种 Iterator 非常相似，下面的代码中，我会对比来写。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 这段是重复的 Code 来自上文</span></div><div class="line">OfficeIterator(Office* o) : student_(o), cursor_(<span class="number">0</span>) {}</div><div class="line"><span class="keyword">void</span> OfficeIterator::first() { </div><div class="line">    cursor_ = <span class="number">0</span>; </div><div class="line">} </div><div class="line"><span class="keyword">bool</span> OfficeIterator::hasNext() <span class="keyword">const</span> {</div><div class="line">    <span class="keyword">return</span> student_ -&gt; size() &gt; cursor_;</div><div class="line">}</div></pre></td></tr></table></figure>
+
+<p>在新的迭代器 <code>BackOfficeIterator</code> 中修改为：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">BackOfficeIterator(Office* o) : student_(o), cursor_(student_ -&gt; size() - <span class="number">1</span>) {}</div><div class="line"><span class="keyword">void</span> BackOfficeIterator::first() { </div><div class="line">    cursor_ = book_ -&gt; size() - <span class="number">1</span>; </div><div class="line">}</div><div class="line"><span class="keyword">bool</span> BackOfficeIterator::hasNext() <span class="keyword">const</span> {</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span> &gt;= cursor_;</div><div class="line">}</div></pre></td></tr></table></figure>
+
+<p>另外还要把 <code>Student* OfficeIterator::next()</code> 中 <code>cursor_ ++;</code> 修改为 <code>cursor_ --;</code>，那么一个反方向的迭代器就写好了。</p>
+<p>最后，我们还是引出 Iterator Pattern 的概念：</p>
+<blockquote>
+<p><strong>Iterator</strong> pattern is a design pattern in which an iterator is used to traverse a container and access the container’s elements.</p>
+</blockquote>
+<p>很直白的定义，希望大家已经理解。</p>
+<hr>
+<h2 id="小结">小结</h2>
+<p>至此，我们已经描述完了 3 种不同的设计模式。（读者: 不是还有 7 种要说吗！） 恩，别急，我在这里停下来是因为，其实这 23 种不同的设计模式被分成了三大类。我们刚才说过的这三种分别是三大类中的一种设计模式。</p>
+<p>四人帮将所有的设计模式分为以下三大类：</p>
+<ul>
+<li><a id="Creational Patterns"></a>Creational Patterns （创建型模式）：通过创建 (create) <em>合适的 (manner suitable)</em>新的对象来设计软件，使软件更具安全性 (hiding)，封装性 (encapsulating)和可维护性。</li>
+<li><a id="Structural Patterns"></a>Structural Patterns （结构型模式）：一以贯之 (identifing a simple way) 的简化软件设计。</li>
+<li><a id="Behavioral Patterns"></a>Behavioral Patterns （行为型模式）：通过识别 (identify) 对象之间是怎么交流的，来加强软件交流时的弹性 (flexibility)。</li>
+</ul>
+<p>我们上文说过的三种设计模式：</p>
+<ul>
+<li>Factory Method Pattern</li>
+<li>Iterator Pattern</li>
+<li>Façade Pattern</li>
+</ul>
+<p>我们来猜一下，这三种模式分别属于什么软件设计模式？</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">设计模式</th>
+<th style="text-align:left">目的</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Factory Method</td>
+<td style="text-align:left">?</td>
+</tr>
+<tr>
+<td style="text-align:left">Iterator</td>
+<td style="text-align:left">?</td>
+</tr>
+<tr>
+<td style="text-align:left">Façade</td>
+<td style="text-align:left">?</td>
+</tr>
+</tbody>
+</table>
+<p>其中 Factory Method Pattern 属于创建型模式（Creational），我们让一个办公室变成了 6 个办公室，让学生在一个地方排队变成在 6 个地方排队。某种角度上来说，我们增加了软件的复杂度，不过提升了软件的可复用性和安全性，这从很大的方面上提升了面对对象编程的优势。不过在很多时候，盲目提升软件复杂度（大量使用 Creational Pattern）可能反倒会导致软件更不可用。所以一定要认清问题的本质，慎重使用 Creational Pattern。</p>
+<p>其中 Iterator Pattern 是典型的行为型模式 （Behavioral Pattern）。Iterator 提供了一种方法可以在不暴露一个容器中的具体内容的情况下，按照一定要求访问一个其中所有元素。 </p>
+<p>Façade Pattern 则是一个结构型模式，我们认清了老师、成绩和学生之间的结构关系，通过一个 Façade Class 来为子系统的一组接口 (Interface) 提供一个统一的界面。避免了结构上的乱七八糟，也简化了客户 (client) 访问这个端口的复杂度（曾经学生要去问不同教授，现在只需要去成绩办公室）。除此之外，也增加了整体的安全性和复用性。</p>
+<p>接下来，我们来枚举一下我们后文中也会出现的设计模式：</p>
+<p><a id="content"></a></p>
+<p><a href="#top">回到最始重新阅读全文</a></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">目的</th>
+<th style="text-align:left">设计模式</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><a href="#Creational Patterns">Creational</a></td>
+<td style="text-align:left"><a href="#factory method pattern"><strong>Factory Method</strong></a></td>
+</tr>
+<tr>
+<td style="text-align:center">↑</td>
+<td style="text-align:left"><a href="#singleton pattern">Singleton</a></td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="#Structural Patterns">Structural</a></td>
+<td style="text-align:left"><a href="#adapter pattern">Adapter</a></td>
+</tr>
+<tr>
+<td style="text-align:center">↑</td>
+<td style="text-align:left"><a href="#composite pattern">Composite</a></td>
+</tr>
+<tr>
+<td style="text-align:center">↑</td>
+<td style="text-align:left"><a href="#decorator pattern">Decorator</a></td>
+</tr>
+<tr>
+<td style="text-align:center">↑</td>
+<td style="text-align:left"><a href="#facade pattern"><strong>Façade</strong></a></td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="#Behavioral Patterns">Behavioral</a></td>
+<td style="text-align:left"><a href="#iterator pattern"><strong>Iterator</strong></a></td>
+</tr>
+<tr>
+<td style="text-align:center">↑</td>
+<td style="text-align:left"><a href="#observer pattern">Observer</a></td>
+</tr>
+<tr>
+<td style="text-align:center">↑</td>
+<td style="text-align:left"><a href="#strategy pattern">Strategy</a></td>
+</tr>
+<tr>
+<td style="text-align:center">↑</td>
+<td style="text-align:left"><a href="#template method pattern">Template Method</a></td>
+</tr>
+</tbody>
+</table>
+<p>后文中，我会按照顺序说明。</p>
+<hr>
+<h2 id="_苹果做手机，康宁大猩猩做屏幕_-_Singleton"><a id="singleton pattern"></a> 苹果做手机，康宁大猩猩做屏幕 - Singleton</h2>
 <p>苹果手机从2007年到现在，从零到第一的背后，必然是优秀的团队与成功的设计。可是苹果会设计所有的每一个细节吗？答案当然是不，每一部iPhone的很多组成部分都来自世界各个厂商。康宁大猩猩玻璃现在广受好评，很多厂商都是用康宁制作的玻璃作为自己手机的屏幕玻璃材质。那么问题就来了：苹果很会设计手机，而康宁很会做玻璃，可是如果让康宁自己做手机，或者让苹果自己发明一种玻璃，可能产品质量就大打折扣，而且两个厂商都不能全心的做自己拿手的东西。</p>
 <p>那么怎么办呢？</p>
 <p>对，答案就是：康宁会做玻璃，那你就一心一意的做玻璃。苹果你会做手机，你就死心塌地的做手机。一个人干一个人的事。康宁做的玻璃可以让苹果用，三星用，HTC用。苹果也可以挑选康宁家，蓝宝石家，或者别人家。</p>
