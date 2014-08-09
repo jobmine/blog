@@ -248,7 +248,10 @@ body {
 .article-entry abbr {
   border-bottom: 1px dotted;
 }
-.article-entry li.first,
+.article-entry li {
+  padding-bottom: 10px;
+  list-style-type: circle;
+}
 .article-entry p.first {
   display: inline-block;
 }
@@ -1423,5 +1426,9 @@ pre .javascript .function {
   }
   .mobile-nav-link:hover {
     color: #fff;
+  }
+  .outer {
+    padding: 0;
+    margin: 0;
   }
 }
