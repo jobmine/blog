@@ -368,7 +368,7 @@
 <blockquote>
 <p><strong>Singleton Pattern</strong> is a design pattern that restricts the <em>instantiation</em> of a class to one object. </p>
 </blockquote>
-<p>也就是说，单例对象的类必须保证只有一个实例存在，并提供一个访问这个实例的方法。一般，一个 singleton object 不需要被 destruct。它会随着一段程式的终止而被 deallocate。<br>一段很简答的实现就是：</p>
+<p>也就是说，单例对象的类必须保证只有一个实例存在，并提供一个访问这个实例的方法。一般，一个 singleton object 不需要被 destruct。它会随着一段程式的终止而被 deallocate。<br>一段很简单的实现就是：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> Singleton {</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="keyword">static</span> Singleton* instance() { <span class="keyword">return</span> &e; }</div><div class="line"><span class="keyword">private</span>:</div><div class="line">    <span class="keyword">static</span> Singleton s;               <span class="comment">// 被保护的 Singleton 的实例</span></div><div class="line">    Singleton(<span class="keyword">const</span> Singleton&);      <span class="comment">// 被保护的 copy-constructor</span></div><div class="line">};</div><div class="line"><span class="comment">// Singleton Singleton::s();</span></div></pre></td></tr></table></figure>
 
 
