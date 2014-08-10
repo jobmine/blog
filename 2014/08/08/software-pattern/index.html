@@ -209,7 +209,7 @@
     
   </div>
   <div class="article-inner">
-    
+    <!--  -->
     
       <header class="article-header">
         
@@ -584,8 +584,6 @@
 <p>其中 Iterator Pattern 是典型的行为型模式 （Behavioral Pattern）。Iterator 提供了一种方法可以在不暴露一个容器中的具体内容的情况下，按照一定要求访问一个其中所有元素。 </p>
 <p>Façade Pattern 则是一个结构型模式，我们认清了老师、成绩和学生之间的结构关系，通过一个 Façade Class 来为子系统的一组接口 (Interface) 提供一个统一的界面。避免了结构上的乱七八糟，也简化了客户 (client) 访问这个端口的复杂度（曾经学生要去问不同教授，现在只需要去成绩办公室）。除此之外，也增加了整体的安全性和复用性。</p>
 <p>接下来，我们来枚举一下我们后文中也会出现的设计模式：</p>
-<p><a id="content"></a></p>
-<p><a href="#top">回到最始重新阅读全文</a></p>
 <table>
 <thead>
 <tr>
@@ -813,6 +811,82 @@
 </blockquote>
 <p>我们刚才举得例子是很简单的一个想法，而实用 template method pattern 设计的软件我们可以想象最开始 factory method pattern 的例子。这两种设计模式有异曲同工之处。Template method 比较看中的是父类描述骨架，构建抽象的方法留到子类来进行实现。Factory Method 将实际要建立的物件留到子类解决，Template Method 则是将抽象的流程或算法留到子类完成。</p>
 <p>从面向对象语言的角度，Template Method Pattern 是软件封装性最好的例子。</p>
+<hr>
+<h2 id="总结">总结</h2>
+<p><a href="#top">回到最始重新阅读全文</a></p>
+<p><a id="content"></a></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">目的</th>
+<th style="text-align:left">设计模式</th>
+<th style="text-align:left">关键词</th>
+<th style="text-align:left">总结</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><a href="#Creational Patterns">Creational</a></td>
+<td style="text-align:left"><a href="#factory method pattern"><strong>Factory Method</strong></a></td>
+<td style="text-align:left">注册办公室</td>
+<td style="text-align:left">subclass of object that is instantiated</td>
+</tr>
+<tr>
+<td style="text-align:center">↑</td>
+<td style="text-align:left"><a href="#singleton pattern">Singleton</a></td>
+<td style="text-align:left">大猩猩屏幕</td>
+<td style="text-align:left">the sole instance of a class</td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="#Structural Patterns">Structural</a></td>
+<td style="text-align:left"><a href="#adapter pattern">Adapter</a></td>
+<td style="text-align:left">拼图</td>
+<td style="text-align:left">interface to an object</td>
+</tr>
+<tr>
+<td style="text-align:center">↑</td>
+<td style="text-align:left"><a href="#composite pattern">Composite</a></td>
+<td style="text-align:left">树状结构</td>
+<td style="text-align:left">structure and composition of an object</td>
+</tr>
+<tr>
+<td style="text-align:center">↑</td>
+<td style="text-align:left"><a href="#decorator pattern">Decorator</a></td>
+<td style="text-align:left">炸鸡套餐</td>
+<td style="text-align:left">responsibilities of an object without sub-classing</td>
+</tr>
+<tr>
+<td style="text-align:center">↑</td>
+<td style="text-align:left"><a href="#facade pattern"><strong>Façade</strong></a></td>
+<td style="text-align:left">成绩办公室</td>
+<td style="text-align:left">interface to a subsystem</td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="#Behavioral Patterns">Behavioral</a></td>
+<td style="text-align:left"><a href="#iterator pattern"><strong>Iterator</strong></a></td>
+<td style="text-align:left">遍历</td>
+<td style="text-align:left">how an aggregate’s elements are accessed, traversed</td>
+</tr>
+<tr>
+<td style="text-align:center">↑</td>
+<td style="text-align:left"><a href="#observer pattern">Observer</a></td>
+<td style="text-align:left">医院前台</td>
+<td style="text-align:left">objects that depend on another object; how the dependent objects stay up to date</td>
+</tr>
+<tr>
+<td style="text-align:center">↑</td>
+<td style="text-align:left"><a href="#strategy pattern">Strategy</a></td>
+<td style="text-align:left">屏幕解锁</td>
+<td style="text-align:left">an algorithm</td>
+</tr>
+<tr>
+<td style="text-align:center">↑</td>
+<td style="text-align:left"><a href="#template method pattern">Template Method</a></td>
+<td style="text-align:left">全球化</td>
+<td style="text-align:left">steps of an algorithm</td>
+</tr>
+</tbody>
+</table>
 
       
     </div>
@@ -824,6 +898,20 @@
   </div>
   
     
+<nav id="article-nav">
+  
+    <a href="/blog/2014/08/10/design-pattern-relationship/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          软件设计模式 (Software Design Pattern) 之关系
+        
+      </div>
+    </a>
+  
+  
+</nav>
+
   
 </article>
 
