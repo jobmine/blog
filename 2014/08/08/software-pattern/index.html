@@ -91,6 +91,8 @@
 文学">
 <meta property="og:image" content="https://dl.dropboxusercontent.com/u/43681877/temp/facade.jpg">
 <meta property="og:image" content="https://dl.dropboxusercontent.com/u/43681877/temp/factory.jpg">
+<meta property="og:image" content="https://dl.dropboxusercontent.com/u/43681877/temp/adapter.jpg">
+<meta property="og:image" content="https://dl.dropboxusercontent.com/u/43681877/temp/strategy.jpg">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="软件设计模式 (Software Design Pattern) 之一二">
 <meta name="twitter:description" content="直接跳到最后总结与目录
@@ -450,6 +452,7 @@
 <p>所以本文的思路是，首先提出复杂的情况，然后提出解决的办法，最后引入四人帮提出的设计方法，给出定义。</p>
 <hr>
 <h2 id="学生成绩办公室_-_Façade"><a id="facade pattern"></a>学生成绩办公室 - Façade</h2>
+<p><a href="#content">跳到所有模式目录</a> / <a href="#top">回到全文顶端</a></p>
 <p>还记得刚才那所悲催的学校吗？我们继续拿他开刀。现在学校已经有了两万学生，三千老师，几百种不同的课。所有的课都会有不同的期末成绩，学生考试，考完试以后教授批改卷子，然后给出最后分数。如果一个学生有 5 门课，他就要去分别找 5 个教授。如果一个教授有 200 个学生，就要等在办公室，等着 200 次询问和查找。这不但容易出错（拿错卷子，成绩没有记录，浪费时间，浪费精力，容易丢失等等），而且对学生考试后的身、心、灵都造成了极大的疲惫，也给投机取巧的学生带来偷偷改成绩的机会。</p>
 <p>所以怎么解决？我相信大家都会知道，很好的一个解决办法就是设立一个学生成绩办公室，那么教授批改了成绩之后，把卷子统一交给成绩办公室上分、记录。学生如果要查询成绩，可以直接到学习成绩办公室根据自己的名字查询所有成绩。也就是说，我们避免了教授和学生的直接接触（多对多接触），而通过办公室改成了间接接触（多对一对多）。用一个图来更直观的说明：</p>
 <p><img src="https://dl.dropboxusercontent.com/u/43681877/temp/facade.jpg" alt="有了学生成绩办公室之前之后"> </p>
@@ -465,6 +468,7 @@
 
 <hr>
 <h2 id="_学院注册办公室_-_Factory_Method"><a id="factory method pattern"></a> 学院注册办公室 - Factory Method</h2>
+<p><a href="#content">跳到所有模式目录</a> / <a href="#top">回到全文顶端</a></p>
 <p>学生查成绩的问题有着落了。可是新学期来了，学校又有了一个新的问题：学校一共有 6 个学院，分别是工程学院、数学学院、文科学院、科学学院、环境学院、应用健康学院。新生入学了以后要统一在学校注册。现在的流程是这样的：每个学生到了学校之后去同一个地方报道。学校把 6 个学院的所有东西放在一片空地上，然后根据你是哪个学院的为你找出学院专门的制服、专门的购物表、专门宿舍地图等。所以每一个学生来，学校都要在 6 种衣服中选择 1 种给你，再在 6 中传单中找出 1 种给你。这样非常浪费时间，效率很低，而且很容易拿错。</p>
 <p>解决方案其实也很简单。我们之前只有一个地方报道，如果我们把报道的地方增加到 6 个，每个学院一个。这样，学生来报道的时候可以直接根据提示去自己的学院。这样，在不同的 6 个地方报道的人，总是会拿到一套相同的东西，这样就不再需要在 6 个中寻找某一个学院的。</p>
 <p><img src="https://dl.dropboxusercontent.com/u/43681877/temp/factory.jpg" alt="注册办公室"> </p>
@@ -485,6 +489,7 @@
 
 <hr>
 <h2 id="遍历_-_Iterator"><a id="iterator pattern"></a>遍历 - Iterator</h2>
+<p><a href="#content">跳到所有模式目录</a> / <a href="#top">回到全文顶端</a></p>
 <p>遍历是一个所有程序员都非常熟悉的概念。所谓遍历就是在一个容器中，对每一项数据做某些事情。接下来提出的这个设计模式，既简单又复杂，既易懂又最让人费解。</p>
 <p>如果说上面的学生注册办公室问题中，工程学院的学生有 2217 人，办公室接待只有一个人。为了确保来的人都有被接待，那么：</p>
 <ol>
@@ -626,6 +631,7 @@
 <p>后文中，我会按照顺序说明。</p>
 <hr>
 <h2 id="_苹果做手机，康宁大猩猩做屏幕_-_Singleton"><a id="singleton pattern"></a> 苹果做手机，康宁大猩猩做屏幕 - Singleton</h2>
+<p><a href="#content">跳到所有模式目录</a> / <a href="#top">回到全文顶端</a></p>
 <p>苹果手机从2007年到现在，从零到第一的背后，必然是优秀的团队与成功的设计。可是苹果会设计所有的每一个细节吗？答案当然是不，每一部iPhone的很多组成部分都来自世界各个厂商。康宁大猩猩玻璃现在广受好评，很多厂商都是用康宁制作的玻璃作为自己手机的屏幕玻璃材质。那么问题就来了：苹果很会设计手机，而康宁很会做玻璃，可是如果让康宁自己做手机，或者让苹果自己发明一种玻璃，可能产品质量就大打折扣，而且两个厂商都不能全心的做自己拿手的东西。</p>
 <p>那么怎么办呢？</p>
 <p>对，答案就是：康宁会做玻璃，那你就一心一意的做玻璃。苹果你会做手机，你就死心塌地的做手机。一个人干一个人的事。康宁做的玻璃可以让苹果用，三星用，HTC用。苹果也可以挑选康宁家，蓝宝石家，或者别人家。</p>
@@ -636,6 +642,49 @@
 <p>也就是说，单例对象的类必须保证只有一个实例存在，并提供一个访问这个实例的方法。一般，一个 singleton object 不需要被 destruct。它会随着一段程式的终止而被 deallocate。<br>一段很简单的实现就是：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> Singleton {</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="keyword">static</span> Singleton* instance() { <span class="keyword">return</span> &e; }</div><div class="line"><span class="keyword">private</span>:</div><div class="line">    <span class="keyword">static</span> Singleton s;               <span class="comment">// 被保护的 Singleton 的实例</span></div><div class="line">    Singleton(<span class="keyword">const</span> Singleton&);      <span class="comment">// 被保护的 copy-constructor</span></div><div class="line">};</div><div class="line"><span class="comment">// Singleton Singleton::s();</span></div></pre></td></tr></table></figure>
 
+<hr>
+<h2 id="_拼图_-_Adapter"><a id="adapter pattern"></a> 拼图 - Adapter</h2>
+<p><a href="#content">跳到所有模式目录</a> / <a href="#top">回到全文顶端</a></p>
+<p>据称，<a href="http://en.wikipedia.org/wiki/Jigsaw_puzzle" target="_blank" rel="external">第一个商品拼图出现在1760年前后</a>。从那之后，拼图变成了家喻户晓的益智游戏。拼图实际上就是在训练一种解决问题的能力。</p>
+<p>一般，在我们的软件不能被别人直接使用的时候，我们的第一个解决方案就是更改软件，使它可以使用。可是如果这样，每个不同的用户我们都要去不停的改变源代码。这样既没有很好地封装性，遇到问题也不容易快速发现、解决。这时，软件和客户之间就有了一层代沟（Gap）。那么解决方案是什么？</p>
+<ul>
+<li>更改软件以适应客户</li>
+<li>更改客户以适应软件</li>
+<li>在客户和软件之间建造适应的 class 以适应彼此</li>
+</ul>
+<p>如果客户和软件都是比较大的独立个体，我们可以选择第三种。这样，我们在不更改源代码的情况下，就可以适应新的要求和接口。</p>
+<p><img src="https://dl.dropboxusercontent.com/u/43681877/temp/adapter.jpg" alt="右边蓝色的便是我们的 Adapter class"> </p>
+<p>这种设计模式叫做适配器模式 (Adapter Pattern)，它是结构型模式的一种，找出两种结构不能适应的Gap并对症下药解决。</p>
+<blockquote>
+<p><strong>Adapter pattern</strong> is a software design pattern that allows the interface of an existing class to be used from another interface.</p>
+</blockquote>
+<p>生活里利用这个设计模式最恰当不过的就是转换插头。我在中国能用的插头拿到美国就不能用，那么当电压没问题的时候，我们只需要一个转接头就可以使用。如果有电压问题，也可以使用一个变压器。美国的电板就代表我们的软件，我们的电器插头就是客户，变压器（或转换插头）就是 adapter classes.</p>
+<hr>
+<h2 id="_屏幕解锁_-_Strategy"><a id="strategy pattern"></a> 屏幕解锁 - Strategy</h2>
+<p><a href="#content">跳到所有模式目录</a> / <a href="#top">回到全文顶端</a></p>
+<p>私人信息，重要至极。为了保护手机中的隐私信息，我们都会为他上一个锁。现代的手机里都有各种不同的解锁方式。假设一个手机功能非常全，可以用指纹解锁、人脸识别解锁、声音解锁、眼球解锁、密码解锁、回答问题解锁等等，那么，为了防止客户忘掉，手机一般会同时提供多种解锁。</p>
+<p>比如，来到解锁界面，因为你正在吃鸡翅不方便用指纹，那么你就用声音解锁，如果不能说话的时候，就用人脸识别解锁。如果都不行，那就用密码解锁。那么从软件的角度，我们是应该把这一堆解锁方法全写在一起：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">camera.on();                    // 打开照相机</div><div class="line">photo = camera.takephoto();     // 照一张相</div><div class="line">voice.record();                 // 同时在录一段声音</div><div class="line">fingerprint.wait();             // 指纹识别器也同时打开等着指纹</div><div class="line"><span class="keyword">if</span> (photo.exists()) {           // 检查刚才照的照片有没有人…</div><div class="line">// <span class="keyword">...</span></div></pre></td></tr></table></figure>
+
+<p>这样的设计会让手机又费电，又浪费资源，如果未来要更改代码或者增加新功能也十分不便。那么这里我们就有这样一个解决办法：</p>
+<p><img src="https://dl.dropboxusercontent.com/u/43681877/temp/strategy.jpg" alt="Strategy Pattern"> </p>
+<p>这样，手机会由总解锁算法决定使用哪一种解锁方法并启用相应的继承的算法。从开发的角度上，当我们想去修改一个解锁方式，我们只需要修改相应的算法就可以了，甚至不用去触碰其它的算法。当一种算法被破解，或被用户主动设置为不安全后，可以立刻停止改解锁方法的验证。而且每一种解锁方法的算法可以被复用到所有不同的设备中。</p>
+<p>这种设计模式我们称之为 Strategy Pattern (策略模式)。</p>
+<blockquote>
+<p><strong>Strategy Pattern</strong> is a software design pattern that enables an algorithm’s behavior to be selected at runtime.</p>
+</blockquote>
+<p>在不同的场景中，一个相同的目的有不同的方法可以达到（不同算法可以实现）。这种模式就叫做策略模式。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> UnlockAlg {</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="keyword">virtual</span> <span class="keyword">void</span> unlock() = <span class="number">0</span>;</div><div class="line">};</div><div class="line"></div><div class="line"><span class="keyword">class</span> FingerprintUnlockAlg : <span class="keyword">public</span> UnlockAlg {</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="keyword">virtual</span> <span class="keyword">void</span> unlock() {</div><div class="line">        <span class="comment">// 指纹解锁的实现</span></div><div class="line">    }</div><div class="line">};</div><div class="line"></div><div class="line"><span class="keyword">class</span> FaceUnlockAlg : <span class="keyword">public</span> UnlockAlg {</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="keyword">virtual</span> <span class="keyword">void</span> unlock() {</div><div class="line">        <span class="comment">// 人脸识别解锁的实现</span></div><div class="line">    }</div><div class="line">};</div></pre></td></tr></table></figure>
+
+<p>以上是解锁算法的 interfaces，我们还可以继承更多的方法，也可以继承更详细的算法，比如<code>class PasswordUnlockAlg : public UnlockAlg</code> 还可以继承给高级密码解锁（如 iPhone 的全键盘解锁）和一般密码解锁（如 iPhone 的默认九宫格键盘解锁）如 <code>class SimplePasswordUnlockAlg : public PasswordUnlockAgl</code> 以及 <code>class StrongPasswordUnlockAlg : public PasswordUnlockAgl</code>。</p>
+<p>接下来我们实现这些算法的应用。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> Unlock {</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    Unlock (UnlockAlg* strategy) : strategy_ (strategy) {}</div><div class="line">    <span class="keyword">void</span> setstrategy_ (UnlockAlg* strategy) {</div><div class="line">        strategy_ = strategy;</div><div class="line">    }</div><div class="line">    <span class="keyword">void</span> unlock() {</div><div class="line">        strategy_ -&gt; unlock();</div><div class="line">    }</div><div class="line"><span class="keyword">private</span>:</div><div class="line">    UnlockAlg* strategy_;</div><div class="line">}；</div><div class="line"></div><div class="line"><span class="keyword">int</span> main (<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[]) {</div><div class="line">    FingerprintUnlockAlg FingerprintUnlockAlg;</div><div class="line">    FaceUnlockAlg FaceUnlockAlg;</div><div class="line">    <span class="comment">// 更多解锁算法</span></div><div class="line"></div><div class="line">    Unlock FingerprintUnlock (&FingerprintUnlockAlg);</div><div class="line">    Unlock FaceUnlock (&FaceUnlockAlg);</div><div class="line">    <span class="comment">// 更多解锁实现</span></div><div class="line"></div><div class="line">    FingerprintUnlock.unlock();   <span class="comment">// 采用指纹解锁方法</span></div><div class="line">}</div></pre></td></tr></table></figure>
+
+<p>至此，我们按照 Strategy Pattern 的理念设计，实现了解锁算法的简单化。这种方法也大量应用于密码验证（数字串密码、文件密码、IP密码等），政府、机构文件申请表（地区州省不同，所在地不同等）。当我们的一个动作，在不同场景下需要有不同的方法来处理时，我们就可以采用 Strategy 的建议。</p>
+<hr>
+<h2 id="_医院前台_-_Observer"><a id="observer pattern"></a> 医院前台 - Observer</h2>
+<p><a href="#content">跳到所有模式目录</a> / <a href="#top">回到全文顶端</a></p>
+<p>&lt;未完待续&gt;</p>
 
       
     </div>
