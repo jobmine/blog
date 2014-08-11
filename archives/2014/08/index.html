@@ -98,6 +98,7 @@
       
         <p>面向对象设计 (object-oriented design) 是当下最流行的软件设计方法。本文不对面向对象设计的定义等加以赘述，直切主题：设计原则。（本文是笔者在滑铁卢大学 CS247 的学习笔记，教授为 Joanne Atlee。）</p>
 <p>首先引用 2000 年前后， <a href="http://en.wikipedia.org/wiki/SOLID_%28object-oriented_design%29" target="_blank" rel="external">Robert C. Martin 发明的五大原则首字母记忆法</a>。</p>
+<p><a id="content"></a></p>
 <table>
 <thead>
 <tr>
@@ -113,21 +114,21 @@
 <td style="text-align:center">✓</td>
 <td style="text-align:center">S</td>
 <td style="text-align:center">SRP</td>
-<td>Single Responsibility Principle</td>
+<td><a href="#srp">Single Responsibility Principle</a></td>
 <td>单一功能原则</td>
 </tr>
 <tr>
 <td style="text-align:center">✓</td>
 <td style="text-align:center">O</td>
 <td style="text-align:center">OCP</td>
-<td>Open-Closed Principle</td>
-<td>开闭原则原则</td>
+<td><a href="#ocp">Open-Closed Principle</a></td>
+<td>开闭原则</td>
 </tr>
 <tr>
 <td style="text-align:center">✓</td>
 <td style="text-align:center">L</td>
 <td style="text-align:center">LSP</td>
-<td>Liskov Substitution Principle</td>
+<td><a href="#lsp">Liskov Substitution Principle</a></td>
 <td>里氏替换原则</td>
 </tr>
 <tr>
@@ -141,21 +142,21 @@
 <td style="text-align:center">✓</td>
 <td style="text-align:center">D</td>
 <td style="text-align:center">DIP</td>
-<td>Dependency Inversion Principle</td>
+<td><a href="#dip">Dependency Inversion Principle</a></td>
 <td>依赖反转原则</td>
 </tr>
 <tr>
 <td style="text-align:center">✓</td>
 <td style="text-align:center"></td>
 <td style="text-align:center">LoD</td>
-<td>Law of Demeter</td>
+<td><a href="#lod">Law of Demeter</a></td>
 <td>最少知识原则</td>
 </tr>
 <tr>
 <td style="text-align:center">✓</td>
 <td style="text-align:center"></td>
 <td style="text-align:center">FCI</td>
-<td>Favour Composition over Inheritance</td>
+<td><a href="#fci">Favour Composition over Inheritance</a></td>
 <td>组合优于继承原则</td>
 </tr>
 </tbody>
@@ -203,7 +204,94 @@
 </tr>
 </tbody>
 </table>
-<p>&lt;未完待续&gt;</p>
+<hr>
+<h2 id="_OCP_-_开闭原则"><a id="ocp"></a> OCP - 开闭原则</h2>
+<p><a href="#content">跳到所有模式目录</a></p>
+<blockquote>
+<p>OCP / Open-Closed Principle / 开闭原则</p>
+</blockquote>
+<p>一个管理完善的国家，海关应该对文化、交流、移民等可以带来新东西的开放，而对邪教、毒品等会改变原本国家文化的东西禁关大门。我们再设计一个软件的时候，也是一样的道理。在一个软件中，我们应该对什么开放，对什么关闭呢？</p>
+<blockquote>
+<p>Software entities (classes, modules, functions, etc.) should be <strong>open</strong> for extension, but <strong>closed</strong> for modification.</p>
+</blockquote>
+<p>(Meyer, Bertrand (1988). Object-Oriented Software Construction. Prentice Hall. ISBN 0-13-629049-3.)</p>
+<h3 id="Abstraction_&amp;_Inheritance">Abstraction &amp; Inheritance</h3>
+<p>我们应该在设计软件的时候，对扩展开放，对修改封闭。也就是说，应该提供一个方法，在不改变源代码的前提下，增加、修改源代码的行为。实现这一方法的主要解决方案就是抽象 (Abstraction) 和继承 (Inheritance)。基本的实现方法就是 client code 要尽量依赖一个抽象类 (abstract class) 而不是一个实例类 (concrete class)。实例类可以由抽象类通过继承来满足。</p>
+<p><a id="fci"></a></p>
+<h3 id="Favour_Composition_over_Inheritance_-_组合优于继承原则">Favour Composition over Inheritance - 组合优于继承原则</h3>
+<p>另一个想法就是对于继承 (inheritance) 和组合 (composition) 的讨论。优于继承的情况是当任何情况，只要父类能用 (is accepted)，子类就能用（如白炽灯类继承于灯泡类）。而组合可以用于任何只是想简单化代码或代码复用 (reuse) 的情况。所以一个基本经验告诉我们，任何时候 Favour composition over inheritance，因为当使用组合时，the components’ capabilities<br>(数据和方法) can change at run-time.</p>
+<p>我们再看一种软件设计模式的定义：</p>
+<blockquote>
+<p>Decorator Pattern: encapsulates “features” or additional responsibilities or functionality that can be added to a class at runtime.</p>
+</blockquote>
+<p>这个原则便是应用了 Decorator 设计模式。</p>
+<h3 id="Deligation">Deligation</h3>
+<p>Deligation 是在 Composite 一个物件时，模拟成为 Inheritance 行为的方法，Deligation 描述了两个 objects 之间的关系。在两个 objects 之中，第一个 object 可以帮助或修改第二个 object 的行为，这时候，第一个 object 就是第二个 object 的 deligation (可以理解为代理或委托)。</p>
+<p>举个例子，如果我要选课，学校会把课不定时放在网上，我每天要上课，不能一直盯着那个网站，不停刷新，那么我就跟一个比较闲朋友（这个朋友就是 deligate）说，你看着，要是有 CS247 一出现，就给我选上。然后我就不用管了。</p>
+<p>这个模式的价值在于你可以在一个中心对象中任意修改其它很多对象的行为。非常相似汇编中的 jump。</p>
+<hr>
+<h2 id="_SRP_-_单一功能原则"><a id="srp"></a> SRP - 单一功能原则</h2>
+<p><a href="#content">跳到所有模式目录</a></p>
+<blockquote>
+<p>SRP / <strong>Single Responsibility Principle</strong> / 单一功能原则 states every context (class, function, variable, etc.) should have a single responsibility, and that responsibility should be entirely encapsulated by the context.</p>
+</blockquote>
+<p>很好理解，就是说一个人干一个人的事，干就干好。如果这个事是可以重复的事，那就干好之后把自己是怎么干的封装 (encapsulate) 起来，写好说明，以供后人瞻仰。里面主要是强调了两个事情：</p>
+<ul>
+<li>任何类、方法、函数等等都只应该有一个责任 (responsibility)。</li>
+<li>这一个责任应该被封装 (encapsulate) 起来以便复用 (reuse)。</li>
+</ul>
+<p>SRP 提供了方法可以让我们分解 (decompose) 一个大项目，并使之成为紧密结合 (cohesive) 的程序。</p>
+<hr>
+<h2 id="_DIP_-_依赖反转原则"><a id="dip"></a> DIP - 依赖反转原则</h2>
+<p><a href="#content">跳到所有模式目录</a></p>
+<blockquote>
+<p>DIP / <strong>Dependency Inversion Principle</strong> / 依赖反转原则 states conventional dependency relationships established from <em>high-level, policy-setting</em> modules to <em>low-level, dependency</em> modules are inverted (i.e. reversed), thus rendering high-level modules independent of the low-level module implementation details.</p>
+</blockquote>
+<p>也就是说，小弟应该依赖大哥，大哥不能被小弟牵着鼻子走，否则这个大哥圈就要崩溃了。这是在描述很多情况下，为了满足新的要求，更高级别 (high-level) 的实现要去被修改以满足低级别 (low-level) 。而这样，就限制了复用高层次组件的可行性，使得级别混乱，程序无法维护。</p>
+<h3 id="适配器模式_Adapter_Pattern">适配器模式 Adapter Pattern</h3>
+<p>DIP 实际上应用了适配器模式 (Adapter Pattern)。高级别的接口和低级别的接口不相互吻合的时候，我们应该增加适配器来匹配接口，而不是通过修改高级别的接口。原因显而易见：你可以为了这个低级别修改高级别，但是有了其它低级别的时候，又要修改，这显然不是我们想要的。</p>
+<p>拿飞机场做个例子，飞机场是高级别的实现，而飞机是低级别的实现，这时候，当飞机希望降落在一个飞机场的时候，如果一个新飞机需要螺旋跑道的时候，我们可以为新飞机新建一个适配跑道，而不是修改已存在的跑道，否则其它飞机就不能降落了。（感觉不是很恰当，因为机场一般会选择扩建来兼容新飞机，而且飞机跑道不会是螺旋形的，但是你懂得。）</p>
+<h3 id="组合模式_Composite_Pattern">组合模式 Composite Pattern</h3>
+<p>组合模式定义所有 component 应该有相同的行为模式，可是如果 leaf 后又加入了 component 那么就违反了 DIP。所以可以说 Composite Pattern 是违反 DIP 的。为此，Composite Pattern 出现了两种方式，一个是 Uniformity，一个是 Safety（即为leaf添加限制条件）。</p>
+<hr>
+<h2 id="_LSP_-_里氏替换原则"><a id="lsp"></a> LSP - 里氏替换原则</h2>
+<p><a href="#content">跳到所有模式目录</a></p>
+<blockquote>
+<p>LSP / <strong>Liskov Substitutability Principle</strong> / 里氏替换原则</p>
+</blockquote>
+<p>亚裔科学教周以真和Liskov在1994年提出了这个原则，很短的一句话蕴含很深的哲理：<strong>子类对象可以替换父类对象被使用。</strong> Liskov 的原文是这样说的：</p>
+<blockquote>
+<p>Let q(x) be a property provable about objects x of type T. Then q(y) should be true for objects y of type S where S is a subtype of T.</p>
+</blockquote>
+<p>形象的说，朝鲜领导人是一个很好的例子：儿子应该能在任何时候无障碍 (without alternating any properties) 替换掉爹。而且：</p>
+<ul>
+<li>objects accept the base class’s messages - 儿子任何时候要听爹的话</li>
+<li>methods require no more than base class methods - 儿子不能比爹要的多（要求更低，比如没有豪华别墅也要住）</li>
+<li>methods promise no less than base class methods - 儿子不能比爹承诺的少（限制更多，比如爹说承诺当年每人给50两白银，儿子现在就得承诺100两。）</li>
+</ul>
+<p>当我们去 overriding 一个 inherited <em>virtual</em> function 的时候，必须满足一下三点：</p>
+<ul>
+<li><p>Signatures: The derived-class objects must have all of the methods of the base class, and their signatures must match. - 儿子喜当爹后得跟爹有一样多的技能，并且得学一个风格的 (Type match)</p>
+</li>
+<li><p>Method behaviours: Calls to derived-class methods must behave like calls to the corresponding base-class methods. - 儿子跟爹比，得少毛病 (same or weaken pre-condition)，多付出 (same or strength post-condition)</p>
+</li>
+<li><p>Properties: The derived class must preserve all properties of the base class objects. - 儿子跟爹得是一个血统，要预留所有属性</p>
+</li>
+</ul>
+<hr>
+<h2 id="_LoD_-_最少知识原则"><a id="lod"></a> LoD - 最少知识原则</h2>
+<p><a href="#content">跳到所有模式目录</a></p>
+<blockquote>
+<p>LoD / <strong>Law of Demeter</strong> / 最少知识原则 states each unit should have only limited knowledge about other units: only units “closely” related to the current unit.</p>
+</blockquote>
+<p>简单的说，就是只跟最好的朋友说话 (only talk to your immediate friends.)。OO中的封装性是 LoD 一个很好的体现。</p>
+<p>举一个例子，如果你让一个人行走，你会选择那一种方式：</p>
+<ul>
+<li><code>human.leg.muscle.protein.cell(move);</code></li>
+<li><code>human.walk();</code></li>
+</ul>
+<p>显然我们会选择第二个，第一个例子中，如果我们不知道肌肉是怎么运动的，我们就不知道怎么行走了。实际生活中，你不知道其实也可以走。这就是最少知识原则。同时另一方面，从 <code>human</code> 一直 call 到 <code>cell</code> 经历了太多 neighbours，使程序在未来很难复用。</p>
+<p>所以 LoD 的应用，可以帮助我们提高软件的可复用性（因为封装性 - Encapsulation）和安全性（因为信息隐藏 - Information Hiding）。</p>
 
       
     </div>
