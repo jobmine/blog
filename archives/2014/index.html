@@ -149,7 +149,21 @@
 <p>请注意：从编译器（Compiler）的角度看 template，只要有一种 type 是可以通过编译器的，那么 <code>&lt;typename T&gt;</code> 的类模板就会通过编译。在后面使用该模版的时候，编译器会再次编译 template 并给出符合情景的类或函数。也就是说，如果模板本身是有错的，不过如果可以通过编译，并且在代码中暂时没有使用，编译器是不会给出错误的。（编译器是乐观的）</p>
 <hr>
 <p>友元函数 (friend function) 在模版中的应用</p>
-<p>&lt;未完待续&gt;</p>
+<p>Friend function 在模版中有三种用法：</p>
+<ul>
+<li>A friend declaration for an ordinary nontemplate class or function, which grants friendship to the specific named class or function.</li>
+<li>A friend declaration for a class template or function template, which grants access to all instances of the friend.</li>
+<li>A friend declaration that grants access only to a specific instance of a class or function template.</li>
+</ul>
+<p>简单的说，也就是以下三种：</p>
+<ul>
+<li>aa</li>
+<li>友元模版：所有这个模版的实现都是某个函数的 friend，可以想象成诸葛亮告诉刘备<blockquote>
+<p>将军向宠，性行淑均(33)，晓畅(34)军事，试用(35)于昔日，先帝称之曰“能”，是以众议举宠为督(36)：愚以为营(37)中之事，悉以咨之，必能使行阵(38)和睦，优劣得所(39)。</p>
+</blockquote>
+</li>
+<li>aa</li>
+</ul>
 <p>参考资料 <a href="http://en.wikipedia.org/wiki/Template" target="_blank" rel="external">Wikipedia</a> / <a href="https://www.student.cs.uwaterloo.ca/~cs247/" target="_blank" rel="external">University of Waterloo CS247</a> / <a href="http://www.cnblogs.com/gw811/archive/2012/10/25/2738929.html" target="_blank" rel="external">zero516cn</a> / <a href="http://bbs.csdn.net/topics/250007668" target="_blank" rel="external">jadedrip</a></p>
 
       
