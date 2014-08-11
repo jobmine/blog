@@ -163,19 +163,19 @@
 </ul>
 <p>在上面 <em>C++ Premier</em> 给出的定义中，模版和友元函数的三种关系可以这样理解。</p>
 <hr>
-<h3 id="模版加别人好友_-_我干啥都行">模版加别人好友 - 我干啥都行</h3>
+<h3 id="加别人好友_-_个人充分信任">加别人好友 - 个人充分信任</h3>
 <p>既是在一个模版之中定义一个不是模版的友元。</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt; <span class="keyword">class</span> A {</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="keyword">friend</span> <span class="keyword">void</span> foo();</div><div class="line">    <span class="comment">// ...</span></div><div class="line">};</div></pre></td></tr></table></figure>
 
 <p>这时，<code>foo</code> 可以访问 A 类实例 (instances) 中的任何 <code>private</code> 和 <code>protected</code> 的方法。</p>
 <hr>
-<h3 id="模版被别人加好友_-_我全家干啥都行">模版被别人加好友 - 我全家干啥都行</h3>
+<h3 id="加模版好友_-_全家充分信任">加模版好友 - 全家充分信任</h3>
 <p>也就是说，一个模版在其它模版中做了友元函数，如：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt; <span class="keyword">class</span> A {</div><div class="line">    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> U&gt; <span class="keyword">friend</span> <span class="keyword">void</span> foo(U u);</div><div class="line">};</div></pre></td></tr></table></figure>
 
 <p>这时，友元函数 <code>foo</code> 可以访问 A 类中的任何实例的数据。既不论是 <code>int</code> 还是 <code>double</code> 的实例，都可以访问。</p>
 <hr>
-<h3 id="模版被别人加关注_-_限制类型">模版被别人加关注 - 限制类型</h3>
+<h3 id="加别人关注_-_限制信任">加别人关注 - 限制信任</h3>
 <p>与上一种类似，但是我们增加了形参类型的限制。</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt; <span class="keyword">void</span> foo(T, t); <span class="comment">// 必须提前声明</span></div><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt; <span class="keyword">class</span> A {</div><div class="line">   <span class="keyword">friend</span> <span class="keyword">void</span> foo&lt;T&gt;(T t);</div><div class="line">   <span class="keyword">friend</span> <span class="keyword">void</span> foo2&lt;<span class="built_in">string</span>&gt;(<span class="built_in">string</span> s);</div><div class="line">};</div></pre></td></tr></table></figure>
 
