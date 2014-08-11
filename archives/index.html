@@ -74,6 +74,150 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-oo-principles" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/2014/08/11/oo-principles/" class="article-date">
+  <time datetime="2014-08-11T04:14:48.000Z" itemprop="datePublished">8月 11 2014</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    <!--  -->
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2014/08/11/oo-principles/">面向对象设计原则之一二</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>面向对象设计 (object-oriented design) 是当下最流行的软件设计方法。本文不对面向对象设计的定义等加以赘述，直切主题：设计原则。（本文是笔者在滑铁卢大学 CS247 的学习笔记，教授为 Joanne Atlee。）</p>
+<p>首先引用 2000 年前后， <a href="http://en.wikipedia.org/wiki/SOLID_%28object-oriented_design%29" target="_blank" rel="external">Robert C. Martin 发明的五大原则首字母记忆法</a>。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">本文</th>
+<th style="text-align:center">首字</th>
+<th style="text-align:center">简称</th>
+<th>英文全名</th>
+<th>中文全名</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">✓</td>
+<td style="text-align:center">S</td>
+<td style="text-align:center">SRP</td>
+<td>Single Responsibility Principle</td>
+<td>单一功能原则</td>
+</tr>
+<tr>
+<td style="text-align:center">✓</td>
+<td style="text-align:center">O</td>
+<td style="text-align:center">OCP</td>
+<td>Open-Closed Principle</td>
+<td>开闭原则原则</td>
+</tr>
+<tr>
+<td style="text-align:center">✓</td>
+<td style="text-align:center">L</td>
+<td style="text-align:center">LSP</td>
+<td>Liskov Substitution Principle</td>
+<td>里氏替换原则</td>
+</tr>
+<tr>
+<td style="text-align:center"></td>
+<td style="text-align:center">I</td>
+<td style="text-align:center">ISP</td>
+<td>Interface Segregation Principle</td>
+<td>接口隔离原则</td>
+</tr>
+<tr>
+<td style="text-align:center">✓</td>
+<td style="text-align:center">D</td>
+<td style="text-align:center">DIP</td>
+<td>Dependency Inversion Principle</td>
+<td>依赖反转原则</td>
+</tr>
+<tr>
+<td style="text-align:center">✓</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">LoD</td>
+<td>Law of Demeter</td>
+<td>最少知识原则</td>
+</tr>
+<tr>
+<td style="text-align:center">✓</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">FCI</td>
+<td>Favour Composition over Inheritance</td>
+<td>组合优于继承原则</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="OO设计基础">OO设计基础</h2>
+<p>在开始描述任何原则之前，我们先回顾一下面向对象设计的一些基础：</p>
+<ul>
+<li>Separation of Concerns - 面对对象</li>
+<li>Encapsulate what is likely to change - 封装</li>
+<li>Encapsulate Data Represntation - 封装</li>
+<li>Abstraction (interfaces, ADTs) - 抽象</li>
+<li>Reuse (through composition and inheritance) - 复用</li>
+<li>Polymorphism - 多态</li>
+</ul>
+<p>基本可以总结为四点：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">首字</th>
+<th>英文全名</th>
+<th>中文全名</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">A</td>
+<td>Abstraction</td>
+<td>抽象性</td>
+</tr>
+<tr>
+<td style="text-align:center">P</td>
+<td>Encapsulation</td>
+<td>封装性</td>
+</tr>
+<tr>
+<td style="text-align:center">E</td>
+<td>Inheritance</td>
+<td>继承</td>
+</tr>
+<tr>
+<td style="text-align:center">I</td>
+<td>Polymorphism</td>
+<td>多态</td>
+</tr>
+</tbody>
+</table>
+<p>&lt;未完待续&gt;</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://jobmine.github.io/2014/08/11/oo-principles/" data-id="1zx7yfpchrpquch4" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-cpp-template" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/blog/2014/08/10/cpp-template/" class="article-date">
