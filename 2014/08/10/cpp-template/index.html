@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>C++ 模版 (Template) 之一二 | 鲁卡</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="如果你需要写一个函数用自定义的方法来比较两个数，因为 C++ 是强类型定义语言（也就是说，一旦一个变量被初始化为 Integer，除非强制转换，否则它一辈子就这样了。），所以如果比较两个 int 以及两个 double，那么就要写两个不同的函数。不过有一个解决方法就是使用 C++ 模版。
+C++ 模版是 C++ 代码重用的经典体现。面向对象编程的一大概念是多态 (Polymorphism)，而 C">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C++ 模版 (Template) 之一二">
+<meta property="og:url" content="http://jobmine.github.io/blog/2014/08/10/cpp-template/">
+<meta property="og:site_name" content="鲁卡">
+<meta property="og:description" content="如果你需要写一个函数用自定义的方法来比较两个数，因为 C++ 是强类型定义语言（也就是说，一旦一个变量被初始化为 Integer，除非强制转换，否则它一辈子就这样了。），所以如果比较两个 int 以及两个 double，那么就要写两个不同的函数。不过有一个解决方法就是使用 C++ 模版。
+C++ 模版是 C++ 代码重用的经典体现。面向对象编程的一大概念是多态 (Polymorphism)，而 C">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="C++ 模版 (Template) 之一二">
+<meta name="twitter:description" content="如果你需要写一个函数用自定义的方法来比较两个数，因为 C++ 是强类型定义语言（也就是说，一旦一个变量被初始化为 Integer，除非强制转换，否则它一辈子就这样了。），所以如果比较两个 int 以及两个 double，那么就要写两个不同的函数。不过有一个解决方法就是使用 C++ 模版。
+C++ 模版是 C++ 代码重用的经典体现。面向对象编程的一大概念是多态 (Polymorphism)，而 C">
+
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/blog/css/style.css" type="text/css">
+
+  
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-53644847-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+</head>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/blog//" id="logo">鲁卡</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/blog//" id="subtitle">大道极简</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/blog//">杂记</a>
+        
+          <a class="main-nav-link" href="/blog//">个人</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><input type="submit" value="&#xF002;" class="search-form-submit"><input type="hidden" name="q" value="site:http://jobmine.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-cpp-template" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/2014/08/10/cpp-template/" class="article-date">
+  <time datetime="2014-08-11T01:56:47.000Z" itemprop="datePublished">8月 10 2014</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    <!--  -->
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      C++ 模版 (Template) 之一二
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>如果你需要写一个函数用自定义的方法来比较两个数，因为 C++ 是强类型定义语言（也就是说，一旦一个变量被初始化为 Integer，除非强制转换，否则它一辈子就这样了。），所以如果比较两个 int 以及两个 double，那么就要写两个不同的函数。不过有一个解决方法就是使用 C++ 模版。</p>
+<p>C++ 模版是 C++ 代码重用的经典体现。面向对象编程的一大概念是多态 (Polymorphism)，而 C++ 模版是实现 C++ 多态的一个工具。</p>
+<p>来看一个简单的模版例子：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt; T max(T x, T y) { <span class="keyword">return</span> (x &gt; y) ? x : y; }</div></pre></td></tr></table></figure>
+
+<p>在 <code>main</code> 方法中，<code>max(12, 14)</code> 就可以直接用来返回 <code>12</code> 和 <code>14</code> 中的最大值。这时候，请看上面我们的例子，如果我们在比较两个 <code>int</code>，那么我们的模版就会被编译器编辑成：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt; T max(T x, T y) { ... }</div><div class="line"><span class="comment">// 会被编译成为：</span></div><div class="line"><span class="keyword">int</span> max(<span class="keyword">int</span> x, <span class="keyword">int</span> y) { ... }</div></pre></td></tr></table></figure>
+
+<p>如果我们在比较两个 double，编译器会编译为：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt; T max(T x, T y) { ... }</div><div class="line"><span class="keyword">double</span> max(<span class="keyword">double</span> x, <span class="keyword">double</span> y) { ... }</div></pre></td></tr></table></figure>
+
+<hr>
+<p>C++ 模版分为两大种，<strong>函数模版</strong>和<strong>类模板</strong>。</p>
+<ul>
+<li><strong>函数 (function) 模板</strong> 用于<em>参数</em>的类型不同的函数。</li>
+<li><strong>类 (class) 模板</strong> 用于<em>数据成员</em>以及<em>成员函数</em>的类型不同的类 (class)。</li>
+</ul>
+<hr>
+<h2 id="函数模板_(Function_Template)">函数模板 (Function Template)</h2>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> 形参类型A, <span class="keyword">typename</span> 形参类型B, ...&gt; </div><div class="line">返回类型 函数名(形参类型A 形参名A, 形参类型B 形参名B) { <span class="comment">// do something }</span></div></pre></td></tr></table></figure>
+
+<p>需要注意的是：</p>
+<ul>
+<li><code>typename</code> 也可以写为 <code>class</code></li>
+<li>参数型和名不能相同，且一般习惯写为 <code>typename T</code> 或 <code>typename T1, typename T2</code></li>
+<li>因为我们是函数模版，所以返回类型是一个数据型（比如刚定义的 T 或者 int 或其它）</li>
+</ul>
+<p>比如，如果我们要写一个将两个数字加在一起的函数，我们就可以根据模版：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> 形参类型A, <span class="keyword">typename</span> 形参类型B, ...&gt; </div><div class="line">返回类型 函数名(形参类型A 形参名A, 形参类型B 形参名B) { <span class="comment">// do something }</span></div><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt; T sum(<span class="keyword">const</span> T& a, <span class="keyword">const</span> T& b) { <span class="comment">// ... }</span></div></pre></td></tr></table></figure>
+
+<p>接下来，我们看看另一种模版 - 类模板。</p>
+<hr>
+<h2 id="类模板_(Class_Template)">类模板 (Class Template)</h2>
+<p>定义‘类模版’模版：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> 形参类型A, <span class="keyword">typename</span> 形参类型B, ...&gt; </div><div class="line"><span class="keyword">class</span> 类名 { <span class="comment">// do something }</span></div><div class="line"></div><div class="line"><span class="comment">// 例如</span></div><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt; <span class="keyword">class</span> someClass { }</div></pre></td></tr></table></figure>
+
+<p>定义‘类模板函数’模版：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">template</span> &lt;形参类型A 形参名A, 形参类型B 形参名B, ...&gt;</div><div class="line">返回类型 类名&lt;形参类型A, 形参类型B, ...&gt;::函数名(形参名A, 形参名B, ...)</div><div class="line">{ <span class="comment">// do something }，</span></div><div class="line"></div><div class="line"><span class="comment">// 例如</span></div><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T1,<span class="keyword">typename</span> T2&gt; <span class="keyword">void</span> someClass&lt;T1,T2&gt;::someFunction() { };</div></pre></td></tr></table></figure>
+
+<p>需要注意的是：</p>
+<ul>
+<li>如 <code>&lt;typename T&gt;</code> 被定义后，模版内的代码可以出现 T</li>
+<li>在使用类模版时，可以这样定义：<code>classTemp&lt;int&gt;</code>, <code>classTemp&lt;double&gt;</code> 或 <code>classTemp&lt;int, double&gt;</code></li>
+<li>可以在定义 <code>typename</code> 时定义初始默认值，如：</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="keyword">int</span> MAXSIZE = <span class="number">2000</span>&gt;</div><div class="line"><span class="keyword">class</span> Stack {</div><div class="line"><span class="keyword">private</span>:</div><div class="line">	T elems[MAXSIZE];</div><div class="line">};</div><div class="line"></div><div class="line"><span class="comment">// Main 中的实现</span></div><div class="line">Stack&lt;<span class="keyword">float</span> ,<span class="number">12</span>&gt; studentStack;  <span class="comment">// 返回12个坑</span></div><div class="line">Stack&lt;<span class="keyword">int</span>, <span class="number">57</span>&gt; studentStack;     <span class="comment">// 返回57个坑</span></div><div class="line">Stack&lt;<span class="keyword">float</span>&gt; studentStack;         <span class="comment">// 返回2000个坑</span></div></pre></td></tr></table></figure>
+
+<p>下面是一个有两个 public functions 的类模板定义以及其类模板中函数的定义。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T1, <span class="keyword">typename</span> T2&gt; <span class="keyword">class</span> myClass {</div><div class="line"><span class="keyword">private</span>:</div><div class="line">	T1 t1_;</div><div class="line">	T2 t2_;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">	myClass(T1 a, T2 b);</div><div class="line">	<span class="keyword">void</span> show();</div><div class="line">};</div><div class="line"></div><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T1, <span class="keyword">typename</span> T2&gt;</div><div class="line">myClass&lt;T1, T2&gt;::myClass(T1 a, T2 b) : t1_(a), t2_(b) { }</div><div class="line"></div><div class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T1, <span class="keyword">typename</span> T2&gt;</div><div class="line"><span class="keyword">void</span> myClass&lt;T1, T2&gt;::show() {</div><div class="line">	std::<span class="built_in">cout</span> &lt;&lt; t1_ &lt;&lt; <span class="string">" "</span> &lt;&lt; t2_ &lt;&lt; std::endl;</div><div class="line">}</div></pre></td></tr></table></figure>
+
+<p>请注意：从编译器（Compiler）的角度看 template，只要有一种 type 是可以通过编译器的，那么 <code>&lt;typename T&gt;</code> 的类模板就会通过编译。在后面使用该模版的时候，编译器会再次编译 template 并给出符合情景的类或函数。也就是说，如果模板本身是有错的，不过如果可以通过编译，并且在代码中暂时没有使用，编译器是不会给出错误的。（编译器是乐观的）</p>
+<hr>
+<p>友元函数 (friend function) 在模版中的应用</p>
+<p>&lt;未完待续&gt;</p>
+<p>参考资料 <a href="http://en.wikipedia.org/wiki/Template" target="_blank" rel="external">Wikipedia</a> / <a href="https://www.student.cs.uwaterloo.ca/~cs247/" target="_blank" rel="external">University of Waterloo CS247</a> / <a href="http://www.cnblogs.com/gw811/archive/2012/10/25/2738929.html" target="_blank" rel="external">zero516cn</a> / <a href="http://bbs.csdn.net/topics/250007668" target="_blank" rel="external">jadedrip</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://jobmine.github.io/2014/08/10/cpp-template/" data-id="w9yqcz1xopmzuh41" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/blog/2014/08/08/software-pattern/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">软件设计模式 (Software Design Pattern) 之一二</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+      </div>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/blog//" class="mobile-nav-link">杂记</a>
+  
+    <a href="/blog//" class="mobile-nav-link">个人</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/blog/fancybox/jquery.fancybox.css" type="text/css">
+
+  <script src="/blog/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+
+<script src="/blog/js/script.js" type="text/javascript"></script>
+
+  </div>
+</body>
+</html>
