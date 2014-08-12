@@ -352,8 +352,70 @@
 </table>
 <hr>
 <h2 id="Adapter_适配器">Adapter 适配器</h2>
-<p>我们将会讨论到以下适配器： <code>mem_fun</code>, <code>mem_fun_ptr</code>, <code>bind1st</code>, <code>bind2nd</code>, <code>sum&lt;&gt;</code>, <code>greater&lt;&gt;</code>, <code>greater_equal&lt;&gt;</code>, <code>less&lt;&gt;</code>.</p>
-<p>&lt;未完待续&gt;</p>
+<p>适配器要先包含 <code>#include &lt;functional&gt;</code>，我们将会讨论到以下适配器： <code>mem_fun</code>, <code>mem_fun_ref</code>, <code>bind1st</code>, <code>bind2nd</code>, <code>plus&lt;&gt;</code>, <code>greater&lt;&gt;</code>, <code>greater_equal&lt;&gt;</code>, <code>less&lt;&gt;</code>.</p>
+<table>
+<thead>
+<tr>
+<th><code>#include</code></th>
+<th>模版名</th>
+<th>用法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&lt;functional&gt;</code></td>
+<td><code>mem_fun</code></td>
+<td><code>mem_fun(&amp;函数)</code>，下有详细例子</td>
+</tr>
+<tr>
+<td><code>&lt;functional&gt;</code></td>
+<td><code>mem_fun_ref</code></td>
+<td>与上同，只是应用于指针容器</td>
+</tr>
+<tr>
+<td><code>&lt;functional&gt;</code></td>
+<td><code>bind1st</code></td>
+<td><code>bind1st(std::stl适配器, 值)</code>，绑定第一位</td>
+</tr>
+<tr>
+<td><code>&lt;functional&gt;</code></td>
+<td><code>bind2nd</code></td>
+<td>与上同，绑定第二位</td>
+</tr>
+<tr>
+<td><code>&lt;functional&gt;</code></td>
+<td><code>plus&lt;&gt;</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>&lt;functional&gt;</code></td>
+<td><code>greater&lt;&gt;</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>&lt;functional&gt;</code></td>
+<td><code>greater_equal&lt;&gt;</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>&lt;functional&gt;</code></td>
+<td><code>less&lt;&gt;</code></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="mem_fun_例子"><code>mem_fun</code> 例子</h3>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="stl_container"><span class="built_in">vector</span> &lt;<span class="built_in">string</span>*&gt;</span> numbers;</div><div class="line">numbers.push_back ( <span class="string">"cs247"</span> );</div><div class="line"></div><div class="line"><span class="stl_container"><span class="built_in">vector</span> &lt;<span class="keyword">int</span>&gt;</span> lengths ( numbers.size() );</div><div class="line">transform (numbers.begin(), numbers.end(), lengths.begin(), **mem_fun**(&string::length));</div></pre></td></tr></table></figure>
+
+<p>这时，上面的代码中，<code>lengths</code> 中的第一个值就是 <code>5</code>。如果上面的例子中，vector<int> lengths<code>改变成为</code>vector <string*> lengths<code>，那么，这里就要用到</code>mem_fun_ref`。</string*></int></p>
+<h3 id="bind1st_&amp;_equal_to_例子"><code>bind1st</code> &amp; <code>equal_to</code> 例子</h3>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">int</span> numbers[] = {<span class="number">10</span>, <span class="number">20</span>, <span class="number">30</span>, <span class="number">40</span>, <span class="number">50</span>, <span class="number">10</span>};</div><div class="line"></div><div class="line"><span class="keyword">int</span> count = count_if(numbers, numbers + <span class="number">6</span>, bind1st(equal_to&lt;<span class="keyword">int</span>&gt; (), <span class="number">10</span>));</div></pre></td></tr></table></figure>
+
+<p>以上结果 <code>count == 2</code>， 因为有两个和 <code>10</code> 相等的值。</p>
+<h3 id="plus&lt;&gt;_例子"><code>plus&lt;&gt;</code> 例子</h3>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">int</span> first[] = {<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>};</div><div class="line"><span class="keyword">int</span> second[] = {<span class="number">10</span>, <span class="number">20</span>, <span class="number">30</span>, <span class="number">40</span>, <span class="number">50</span>};</div><div class="line"><span class="keyword">int</span> results[<span class="number">5</span>];</div><div class="line"></div><div class="line">std::transform (first, first+<span class="number">5</span>, second, results, std::plus&lt;<span class="keyword">int</span>&gt;());</div></pre></td></tr></table></figure>
+
+<p>以上结果会得到 11, 22, 33, 44, 55。</p>
 
       
     </div>
