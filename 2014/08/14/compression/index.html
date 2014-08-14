@@ -5,18 +5,21 @@
   
   <title>文件压缩 (Compression) 之一二 | 鲁卡</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Logical compression (逻辑压缩) 利用特定数据的特点进行有逻辑性的压缩（如 png 格式转换成 jpg）。Physical Compression (物理压缩)，只利用字面上的代码进行压缩（如 css 文件化简）。
-Lossy Compression (有损压缩) 会牺牲文件质量进行压缩（如降低图片分辨率）。Lossless Compression （无损压缩）保留文件原质量进">
+  <meta name="description" content="每次打包行李的时候我都觉得要是能压缩东西到无比小的话那简直太幸福了。
+Logical compression (逻辑压缩) 利用特定数据的特点进行有逻辑性的压缩（如 png 格式转换成 jpg）。Physical Compression (物理压缩)，只利用字面上的代码进行压缩（如 css 文件化简）。
+Lossy Compression (有损压缩) 会牺牲文件质量进行压缩（如降低图片分辨率）。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="文件压缩 (Compression) 之一二">
 <meta property="og:url" content="http://jobmine.github.io/blog/2014/08/14/compression/">
 <meta property="og:site_name" content="鲁卡">
-<meta property="og:description" content="Logical compression (逻辑压缩) 利用特定数据的特点进行有逻辑性的压缩（如 png 格式转换成 jpg）。Physical Compression (物理压缩)，只利用字面上的代码进行压缩（如 css 文件化简）。
-Lossy Compression (有损压缩) 会牺牲文件质量进行压缩（如降低图片分辨率）。Lossless Compression （无损压缩）保留文件原质量进">
+<meta property="og:description" content="每次打包行李的时候我都觉得要是能压缩东西到无比小的话那简直太幸福了。
+Logical compression (逻辑压缩) 利用特定数据的特点进行有逻辑性的压缩（如 png 格式转换成 jpg）。Physical Compression (物理压缩)，只利用字面上的代码进行压缩（如 css 文件化简）。
+Lossy Compression (有损压缩) 会牺牲文件质量进行压缩（如降低图片分辨率）。">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="文件压缩 (Compression) 之一二">
-<meta name="twitter:description" content="Logical compression (逻辑压缩) 利用特定数据的特点进行有逻辑性的压缩（如 png 格式转换成 jpg）。Physical Compression (物理压缩)，只利用字面上的代码进行压缩（如 css 文件化简）。
-Lossy Compression (有损压缩) 会牺牲文件质量进行压缩（如降低图片分辨率）。Lossless Compression （无损压缩）保留文件原质量进">
+<meta name="twitter:description" content="每次打包行李的时候我都觉得要是能压缩东西到无比小的话那简直太幸福了。
+Logical compression (逻辑压缩) 利用特定数据的特点进行有逻辑性的压缩（如 png 格式转换成 jpg）。Physical Compression (物理压缩)，只利用字面上的代码进行压缩（如 css 文件化简）。
+Lossy Compression (有损压缩) 会牺牲文件质量进行压缩（如降低图片分辨率）。">
 
   
   
@@ -97,7 +100,8 @@ Lossy Compression (有损压缩) 会牺牲文件质量进行压缩（如降低�
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Logical compression (逻辑压缩) 利用特定数据的特点进行有逻辑性的压缩（如 png 格式转换成 jpg）。<br>Physical Compression (物理压缩)，只利用字面上的代码进行压缩（如 css 文件化简）。</p>
+        <p>每次打包行李的时候我都觉得要是能压缩东西到无比小的话那简直太幸福了。</p>
+<p>Logical compression (逻辑压缩) 利用特定数据的特点进行有逻辑性的压缩（如 png 格式转换成 jpg）。<br>Physical Compression (物理压缩)，只利用字面上的代码进行压缩（如 css 文件化简）。</p>
 <p>Lossy Compression (有损压缩) 会牺牲文件质量进行压缩（如降低图片分辨率）。<br>Lossless Compression （无损压缩）保留文件原质量进行压缩（如 zip 压缩）。</p>
 <hr>
 <h2 id="Character_Encoding">Character Encoding</h2>
@@ -122,6 +126,21 @@ Lossy Compression (有损压缩) 会牺牲文件质量进行压缩（如降低�
 <td>霍夫曼编码</td>
 <td></td>
 <td>Huffman Coding</td>
+</tr>
+<tr>
+<td>“搬到前面”</td>
+<td>MTF</td>
+<td>Move-to-Front Transform</td>
+</tr>
+<tr>
+<td>藍波-立夫-衛曲編碼法</td>
+<td>LZW</td>
+<td>Lempel-Ziv-Welch</td>
+</tr>
+<tr>
+<td></td>
+<td>BWT</td>
+<td>Burrows-Wheeler Transform</td>
 </tr>
 </tbody>
 </table>
@@ -149,7 +168,133 @@ Lossy Compression (有损压缩) 会牺牲文件质量进行压缩（如降低�
 </ul>
 <hr>
 <h2 id="Huffman_Coding">Huffman Coding</h2>
-<p>这种方法也叫最优二叉树</p>
+<p>这种方法也叫最优(diao)二叉树，由一个很优(diao)的博士生在MIT发现，当时他的教授说你要么写学期报告，要么来参加期末考试。这个很优(diao)的学生就选了写个更优(diao)的算法好了。于是，他发现并描述了这个方法，并在效率上超过了他导师参与研究的 Shannon-Fano 压缩方法。</p>
+<p>因为他解决了影响效率的最大一个问题，从上向下建立树的效率很低。他的解决方案是自底向上形成树。</p>
+<p>也就是说，把所有日常（或某个文件中的）字符全部做统计，用比较短的表示出现少的，比较多的表示多的。这个理论有点像英文简写。如果你在一篇文章要出现一个很长的词（比如美利坚合众国马萨诸塞州理科与工科大学电子信息研究学院执行副院长秘书办公室主任王晓明），并且文中会出现20次，那么你会怎样？对，你会写他的简写，（比如美利…..主任王晓明 (下文简写为王主任) ），这样单独20次这个词的压缩率每次就是 <code>3/41=7.3%</code>。</p>
+<p>具体的做法是根据字的出现频率，由下而上画出最优二察树。<a href="http://zh.wikipedia.org/zh-cn/霍夫曼编码#mediaviewer/File:Huffman_algorithm.gif" target="_blank" rel="external">如此 Wikipedia</a></p>
+<p>讨论：</p>
+<ul>
+<li>缺点之一是编码真心很辛苦。</li>
+<li>没有那只特定的二叉树就没办法解码。（不过比较安全）</li>
+<li>非对称性使解码速度很快。</li>
+<li>(在使用专门的二叉树时，)这货是(目前发现的)最牛x的压缩方法，没有之一。是对字符编码的极限。</li>
+<li>Huffman 的树不是固定的，针对不同程序的每一个树都不一样，但是他是静止的(static)，也就是说在编码和解码时，用的是完全一样的树。</li>
+<li>编码和解码效率相同。</li>
+</ul>
+<hr>
+<h2 id="MTF">MTF</h2>
+<blockquote>
+<p>If we see a character now, we’ll probably see it again soon.</p>
+</blockquote>
+<p>MTF 将这种思想发挥到极致。刚才的方法虽然很好，但是我们需要一个 static 的树跟着我们。可是有没有一种办法可以不用一个树呢。MTF 就是解决办法中的一个。</p>
+<table>
+<thead>
+<tr>
+<th>Iteration</th>
+<th>Sequence</th>
+<th>List</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>b</strong> a n a n a a a</td>
+<td><code>1</code></td>
+<td><code>(abcdefghijklmnopqrstuvwxyz)</code></td>
+</tr>
+<tr>
+<td>b <strong>a</strong> n a n a a a</td>
+<td><code>1,1</code></td>
+<td><code>(bacdefghijklmnopqrstuvwxyz)</code></td>
+</tr>
+<tr>
+<td>b a <strong>n</strong> a n a a a</td>
+<td><code>1,1,13</code></td>
+<td><code>(abcdefghijklmnopqrstuvwxyz)</code></td>
+</tr>
+<tr>
+<td>b a n <strong>a</strong> n a a a</td>
+<td><code>1,1,13,1</code></td>
+<td><code>(nabcdefghijklmopqrstuvwxyz)</code></td>
+</tr>
+<tr>
+<td>b a n a <strong>n</strong> a a a</td>
+<td><code>1,1,13,1,1</code></td>
+<td><code>(anbcdefghijklmopqrstuvwxyz)</code></td>
+</tr>
+<tr>
+<td>b a n a n <strong>a</strong> a a</td>
+<td><code>1,1,13,1,1,1</code></td>
+<td><code>(nabcdefghijklmopqrstuvwxyz)</code></td>
+</tr>
+<tr>
+<td>b a n a n a <strong>a</strong> a</td>
+<td><code>1,1,13,1,1,1,0</code></td>
+<td><code>(anbcdefghijklmopqrstuvwxyz)</code></td>
+</tr>
+<tr>
+<td>b a n a n a a <strong>a</strong></td>
+<td><code>1,1,13,1,1,1,0,0</code></td>
+<td><code>(anbcdefghijklmopqrstuvwxyz)</code></td>
+</tr>
+<tr>
+<td>Final</td>
+<td><code>1,1,13,1,1,1,0,0</code></td>
+<td><code>(anbcdefghijklmopqrstuvwxyz)</code></td>
+</tr>
+</tbody>
+</table>
+<p>讨论：</p>
+<ul>
+<li>MTF 是一个适配 (adaptive) 压缩方案。</li>
+<li>解码和编码一个速度。</li>
+</ul>
+<hr>
+<h2 id="LZW">LZW</h2>
+<p>这个方法就是很厉害的 Huffman，它解决了 Huffman 只能在单独字符重复处理上压缩率很高的弊端，方法是不仅检测单字，同时也检测词组。</p>
+<p>具体的方法就是在我们每次取下一个单词之前，确定有没有这个词组。如果有的话就用，没有的话就加到我们的词典里。</p>
+<p>具体的方法请参考 <a href="http://en.wikipedia.org/wiki/Lempel–Ziv–Welch" target="_blank" rel="external">如此 Wikipedia</a></p>
+<p>讨论：</p>
+<ul>
+<li>当固定 bit 长度时，编码长度是固定的。</li>
+<li>字典可能会很大很大很大很大很大很大很大很大，因为每次都在加入新的词组，直到结束。</li>
+</ul>
+<hr>
+<h2 id="BWT">BWT</h2>
+<p>这是一个神奇的东西，所以基本的想法就是，根据一种方法来改变原来字符的排序，然后根据某种哲学或者统计学逻辑，认为这样的话会增加字母挨着的几率，然后在进行压缩。</p>
+<p>这种方法唯一干的事就是原封不动的把一串东西的顺序改变一下，然后记住顺序，然后通过其他的办法进行压缩（使用 MTF 因为字母重复的时候，MTF 会给一堆 <code>0</code> which is very nice）。解码的时候呢，先根据编码使用的方法进行解码，然后再用曾经记下的顺序，把这个东西给变回以前的顺序。很好玩，很有效，很不知所云……</p>
+<p>具体的方法请参考 <a href="http://en.wikipedia.org/wiki/Burrows–Wheeler_transform" target="_blank" rel="external">如此 Wikipedia</a></p>
+<hr>
+<h2 id="总结">总结</h2>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>特点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>RLE</td>
+<td>Variable-width, multiple-character encoding</td>
+</tr>
+<tr>
+<td>Huffman</td>
+<td>Variable-width, single-character (optimal in this case)</td>
+</tr>
+<tr>
+<td>MTF</td>
+<td>Adaptive, transforms to smaller integers be followed by variable-width integer encoding</td>
+</tr>
+<tr>
+<td>LZW</td>
+<td>Adaptive, fixed-width, multiple-character encoding Augments dictionary with repeated substrings</td>
+</tr>
+<tr>
+<td>BWT</td>
+<td>Block compression method, must be followed by MTF</td>
+</tr>
+</tbody>
+</table>
 
       
     </div>
