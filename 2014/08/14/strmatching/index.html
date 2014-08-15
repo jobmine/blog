@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>字符串匹配之一二 | 鲁卡</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="首先，来说说树。
+Trie/try/，也叫 Radix Tree，是一种妙不可言的数据结构。所有的数据都存储在叶子上，左边的都是 0，右边的都是 1。Trie 没有前缀（prefix-free）。
+图片来自 University of Waterloo CS240 课堂笔记，教授 Romain Lebreton。
+找东西啊、删东西啊，效率都是 O(x)，因为只需要 x 次（x 代表二进制码长度），">
+<meta property="og:type" content="article">
+<meta property="og:title" content="字符串匹配之一二">
+<meta property="og:url" content="http://jobmine.github.io/blog/2014/08/14/strmatching/">
+<meta property="og:site_name" content="鲁卡">
+<meta property="og:description" content="首先，来说说树。
+Trie/try/，也叫 Radix Tree，是一种妙不可言的数据结构。所有的数据都存储在叶子上，左边的都是 0，右边的都是 1。Trie 没有前缀（prefix-free）。
+图片来自 University of Waterloo CS240 课堂笔记，教授 Romain Lebreton。
+找东西啊、删东西啊，效率都是 O(x)，因为只需要 x 次（x 代表二进制码长度），">
+<meta property="og:image" content="https://dl.dropboxusercontent.com/u/43681877/temp/trie1.png">
+<meta property="og:image" content="https://dl.dropboxusercontent.com/u/43681877/temp/trie2.png">
+<meta property="og:image" content="https://dl.dropboxusercontent.com/u/43681877/temp/trie3.png">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="字符串匹配之一二">
+<meta name="twitter:description" content="首先，来说说树。
+Trie/try/，也叫 Radix Tree，是一种妙不可言的数据结构。所有的数据都存储在叶子上，左边的都是 0，右边的都是 1。Trie 没有前缀（prefix-free）。
+图片来自 University of Waterloo CS240 课堂笔记，教授 Romain Lebreton。
+找东西啊、删东西啊，效率都是 O(x)，因为只需要 x 次（x 代表二进制码长度），">
+
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/blog/css/style.css" type="text/css">
+
+  
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-53644847-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+</head>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/blog//" id="logo">鲁卡</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/blog//" id="subtitle">大道极简</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/blog//">杂记</a>
+        
+          <a class="main-nav-link" href="/blog//">个人</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><input type="submit" value="&#xF002;" class="search-form-submit"><input type="hidden" name="q" value="site:http://jobmine.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-strmatching" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/2014/08/14/strmatching/" class="article-date">
+  <time datetime="2014-08-14T23:19:16.000Z" itemprop="datePublished">8月 14 2014</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    <!--  -->
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      字符串匹配之一二
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>首先，来说说树。</p>
+<p>Trie<code>/try/</code>，也叫 Radix Tree，是一种妙不可言的数据结构。所有的数据都存储在叶子上，左边的都是 <code>0</code>，右边的都是 <code>1</code>。Trie 没有前缀（prefix-free）。</p>
+<p><img src="https://dl.dropboxusercontent.com/u/43681877/temp/trie1.png" alt="一个 Trie 的示例"><br>图片来自 University of Waterloo CS240 课堂笔记，教授 Romain Lebreton。</p>
+<p>找东西啊、删东西啊，效率都是 <code>O(x)</code>，因为只需要 <code>x</code> 次（<code>x</code> 代表二进制码长度），所以一个多长的二进制码，就要多久（最坏情况）。</p>
+<p>如果我们有两个二进制码：<code>11111111111111</code> 和 <code>11111111111110</code>，那么要操作的效率都是 O(14)，不过我们用人眼来找的话，很简单，一眼就看出来，因为我们只看最后一位，前面都一样，效率就是O(1)。看起来傻傻的，那么有什么办法呢？这里就介绍一下 Compressed Tries (Patricia Tries)，这就是把相同的一段都压缩成一个，然后在 node 上标出压缩的数目。</p>
+<p><img src="https://dl.dropboxusercontent.com/u/43681877/temp/trie2.png" alt="一个 Compressed Trie 的示例"></p>
+<p>然后呢，我们来看看换成字母以后的效果。</p>
+<p><img src="https://dl.dropboxusercontent.com/u/43681877/temp/trie3.png" alt="一个 Multiway Trie 的示例"></p>
+<p>楼上这货叫做 Multiway Trie，是一个允许前缀 (prefix) 字符串 (string) 并在每个字符串后加上一个结束符号 <code>$</code> 的，树。他也有 Compressed 的小伙伴。这样，当我们在操作这种树的时候，就会涉及到我们今天要说的概念：字符串匹配 (string matching)。</p>
+<hr>
+<h2 id="String_Matching">String Matching</h2>
+<p>首先是概念：</p>
+<ul>
+<li>text (haystack) 就是被匹配的。</li>
+<li>pattern (needle) 使用来匹配别人的。</li>
+<li>alphabet 是要找的集（例子中就是英文字母啥的）</li>
+<li>first occurrence 第一次出现匹配</li>
+<li>not occur 没有被匹配</li>
+<li>substring 概念比较恶心，但是去理解一下，就是任何集中的子集</li>
+<li>prefix 前缀，任何字串的前部分，可以是第一个字符，或者第一个到倒数第二个。 比如 <code>abc</code> 就是 <code>abcde</code> 的前缀</li>
+<li>suffix 后缀。</li>
+</ul>
+<p>整个字符串匹配的算法中，其实就是两个概念，一个是意淫 (guess，猜测)，一个是找茬 (check，检查)。猜测的是某一个字母的位置，检查的是是否符合全部字符的匹配。</p>
+<p>今天会讨论四种方法。</p>
+<table>
+<thead>
+<tr>
+<th>中文</th>
+<th>简写</th>
+<th>英文</th>
+<th>Performance</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td>BFS</td>
+<td>Brute-Force Search</td>
+<td><code>O((n - m + 1)m)</code></td>
+</tr>
+<tr>
+<td></td>
+<td>KMP</td>
+<td>Knuth-Morris-Pratt</td>
+<td><code>O(m)</code></td>
+</tr>
+<tr>
+<td></td>
+<td>BM</td>
+<td>Boyer-Moore Algorithm</td>
+<td><code>O()</code></td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="Brute-Force_Search">Brute-Force Search</h2>
+<p>这就是一种很基本、很直白的方式。就是查找所有的可能，然后挨个匹配。非常好理解，不过很慢效率很低。速度是 <code>O((n - m + 1)m)</code>，在 pattern 是 text 的一半或更少的时候，效率是 <code>O(mn)</code>。</p>
+<hr>
+<h2 id="KMP">KMP</h2>
+<p>KMP - Knuth-Morris-Pratt Algorithm 在 1977 年被提出。<br>KMP 比 BFS 牛在对 pattern 的预处理 (preprocessing) 上。这样就对 pattern 有了更多的掌握，可以提供更少的 guess 以加快速度。</p>
+<p>具体的做法是：在从左向右遍历时，每次碰到不可以的情况，根据 pattern 的最长后缀找到新的 guess 的后缀。</p>
+<p>建立列表所花费的时间是 <code>O(m)</code></p>
+<hr>
+<h2 id="BM">BM</h2>
+<p>接下来这种方法是 KMP 每次 guess 后的 match 从最后往前看看的。往往会得到更好的结果。</p>
+<p>我们需要预处理 pattern。首先要做一个 last-occurrence function L，被这样定义：</p>
+<ul>
+<li>the largest index <code>i</code> such that <code>P[i] = c</code> or<br>􏰀* <code>−1</code> if no such index exists<br>简单说就是找出每一个 pattern 中字母在 text 中最后一次出现的那个坐标。这个步骤需要 <code>O(m + Σ)</code></li>
+</ul>
+<p>比如 <code>a</code> 在 <code>abwudaioebaeioaaaaaaww</code> 中最后一次出现就是倒数第三个，也就是 <code>i = 21</code>。</p>
+<p>接下来，我们做一个与 KMP 很相似的列表。区别是，在计算中，任何负数值都当做正确判断 (condition true)。效率为 <code>O(m)</code>。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://jobmine.github.io/2014/08/14/strmatching/" data-id="nd8a6gxgqv3cqmdx" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/blog/2014/08/14/compression/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">文件压缩 (Compression) 之一二</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+      </div>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/blog//" class="mobile-nav-link">杂记</a>
+  
+    <a href="/blog//" class="mobile-nav-link">个人</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/blog/fancybox/jquery.fancybox.css" type="text/css">
+
+  <script src="/blog/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+
+<script src="/blog/js/script.js" type="text/javascript"></script>
+
+  </div>
+</body>
+</html>
